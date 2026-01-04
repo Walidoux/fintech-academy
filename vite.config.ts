@@ -1,10 +1,11 @@
-import path from 'node:path'
+import { resolve } from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
 import solidPlugin from 'vite-plugin-solid'
 
 export default defineConfig({
   plugins: [solidPlugin(), tailwindcss()],
+  base: '/financial-analysis/',
   server: {
     port: 3000,
   },
@@ -16,7 +17,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '~': path.resolve(__dirname, './src'),
+      '~': resolve(import.meta.dirname, './src'),
     },
   },
 })
