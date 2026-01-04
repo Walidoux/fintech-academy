@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+
+/* KaTeX display math styling */
+.katex-display {
+  width: fit-content;
+  margin: 1em auto;
+}
