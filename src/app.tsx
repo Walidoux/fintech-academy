@@ -3,6 +3,7 @@ import 'katex/dist/katex.min.css'
 import { Route, Router } from '@solidjs/router'
 import type { Component } from 'solid-js'
 
+import pkg from '../package.json'
 import Docs from './components/docs'
 
 const Home: Component = () => {
@@ -16,7 +17,7 @@ const Home: Component = () => {
 
 const App: Component = () => {
   return (
-    <Router>
+    <Router base={`/${pkg.name}`}>
       <Route component={Home} path='/' />
       <Route component={Docs} path='/docs/*' />
     </Router>

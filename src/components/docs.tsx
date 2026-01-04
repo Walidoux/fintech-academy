@@ -5,8 +5,12 @@ import remarkMath from 'remark-math'
 import type { Component } from 'solid-js'
 import { createResource, Show } from 'solid-js'
 import { SolidMarkdown } from 'solid-markdown'
+import pkg from '../../package.json'
 import { Typography as CustomTypography } from '../design/custom-typography'
 import { Typography as BaseTypography } from './base-typography'
+
+const BASE_REGEX = new RegExp(`^/?${pkg.name}/?`)
+const DOCS_REGEX = /^\/?docs\/?/
 
 const docsModules = import.meta.glob('../../docs/**/*.{md,mdx}', {
   as: 'raw',
@@ -16,15 +20,36 @@ const docsModules = import.meta.glob('../../docs/**/*.{md,mdx}', {
 const Docs: Component = () => {
   const location = useLocation()
 
-  const path = () => location.pathname.replace('/docs/', '') || ''
+  const path = () =>
+    location.pathname.replace(BASE_REGEX, '').replace(DOCS_REGEX, '') || ''
 
   const loadContent = async (docPath: string) => {
-    if (!docPath) return ''
+    if (!docPath) {
+      return ''
+    }
 
     try {
       const modulePath = (ext: string) => `../../docs/${docPath}.${ext}`
-      const module =
+      let module =
         docsModules[modulePath('mdx')] || docsModules[modulePath('md')]
+
+      if (!module) {
+        const searchPath = `/${docPath}.mdx`
+        const foundKey = Object.keys(docsModules).find((key) =>
+          key.endsWith(searchPath)
+        )
+        if (foundKey) {
+          module = docsModules[foundKey]
+        } else {
+          const searchPathMd = `/${docPath}.md`
+          const foundKeyMd = Object.keys(docsModules).find((key) =>
+            key.endsWith(searchPathMd)
+          )
+          if (foundKeyMd) {
+            module = docsModules[foundKeyMd]
+          }
+        }
+      }
 
       if (module) {
         const content = await module()

@@ -2,10 +2,11 @@ import { resolve } from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
 import solidPlugin from 'vite-plugin-solid'
+import pkg from './package.json'
 
 export default defineConfig({
   plugins: [solidPlugin(), tailwindcss()],
-  base: '/financial-analysis/',
+  base: `/${pkg.name}/`,
   server: {
     port: 3000,
   },
