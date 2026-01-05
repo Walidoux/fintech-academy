@@ -1,4 +1,13 @@
-import { Typography } from './base-typography'
+import { For } from 'solid-js'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from './ui/table'
 
 export const EBITDA = () => {
   const data = {
@@ -39,5 +48,31 @@ export const EBITDA = () => {
     ],
   }
 
-  return <Typography.table data={data} />
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <For each={data.headers}>
+            {(header) => <TableHead>{header}</TableHead>}
+          </For>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <For each={data.rows.slice(0, -1)}>
+          {(row) => (
+            <TableRow>
+              <For each={row}>{(cell) => <TableCell>{cell}</TableCell>}</For>
+            </TableRow>
+          )}
+        </For>
+      </TableBody>
+      <TableFooter>
+        <TableRow>
+          <For each={data.rows.at(-1)}>
+            {(cell) => <TableCell>{cell}</TableCell>}
+          </For>
+        </TableRow>
+      </TableFooter>
+    </Table>
+  )
 }

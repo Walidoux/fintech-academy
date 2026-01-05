@@ -90,33 +90,11 @@ const Docs: Component = () => {
     return { targetHeight, avgParagraphHeight }
   }
 
-  function splitMarkdownByHeight(content: string): [string, string, string] {
-    if (!content) {
-      return ['', '', '']
-    }
-
-    // Parse markdown to get structure
-    const lines = content.split('\n')
-    const paragraphs: string[] = []
-    let currentParagraph = ''
-
-    // Group into paragraphs (better than splitting by lines)
-    for (const line of lines) {
-      if (line.trim() === '' && currentParagraph.trim() !== '') {
-        paragraphs.push(currentParagraph)
-        currentParagraph = ''
-      } else {
-        currentParagraph += `${line}\n`
-      }
-    }
-    if (currentParagraph.trim() !== '') {
-      paragraphs.push(currentParagraph)
-    }
-
-    const { targetHeight, avgParagraphHeight } = calcApproxHeightPerParagraph(
-      paragraphs.length
-    )
-
+  function distributeParagraphs(
+    paragraphs: string[],
+    targetHeight: number,
+    avgParagraphHeight: number
+  ): [string, string, string] {
     // Split into three parts based on target height, checking if half of the node is overflowing
     const part1: string[] = []
     const part2: string[] = []
@@ -153,6 +131,34 @@ const Docs: Component = () => {
     }
 
     return [part1.join('\n\n'), part2.join('\n\n'), part3.join('\n\n')]
+  }
+
+  function splitMarkdownByHeight(content: string): [string, string, string] {
+    if (!content) {
+      return ['', '', '']
+    }
+
+    const paragraphs: string[] = []
+    let currentParagraph = ''
+
+    // Parse markdown to get structure and group into paragraphs
+    for (const line of content.split('\n')) {
+      if (line.trim() === '' && currentParagraph.trim() !== '') {
+        paragraphs.push(currentParagraph)
+        currentParagraph = ''
+      } else {
+        currentParagraph += `${line}\n`
+      }
+    }
+    if (currentParagraph.trim() !== '') {
+      paragraphs.push(currentParagraph)
+    }
+
+    const { targetHeight, avgParagraphHeight } = calcApproxHeightPerParagraph(
+      paragraphs.length
+    )
+
+    return distributeParagraphs(paragraphs, targetHeight, avgParagraphHeight)
   }
 
   const renderMarkdown = (content: string) => (

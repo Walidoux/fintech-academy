@@ -1,4 +1,3 @@
-import { For } from 'solid-js'
 import type { SolidMarkdownOptions } from 'solid-markdown'
 import { cn } from '~/lib/utils'
 
@@ -64,47 +63,6 @@ export const Typography: SolidMarkdownOptions['components'] = {
       <blockquote class={cn('mt-6 border-l-2 pl-6 italic', props.class)}>
         {props.children}
       </blockquote>
-    )
-  },
-
-  table(props) {
-    if (
-      !props.data.rows.every((row) => row.length === props.data.headers.length)
-    ) {
-      return 'Error: Headers size should match the each row size'
-    }
-
-    return (
-      <div class={cn('my-6 w-full overflow-y-auto', props.class)}>
-        <table class='w-full'>
-          <thead>
-            <tr class='m-0 border-t p-0 even:bg-muted'>
-              <For each={props.data.headers}>
-                {(header) => (
-                  <th class='border px-4 py-2 text-left font-bold [[align=center]]:text-center [[align=right]]:text-right'>
-                    {header}
-                  </th>
-                )}
-              </For>
-            </tr>
-          </thead>
-          <tbody>
-            <For each={props.data.rows}>
-              {(row) => (
-                <tr class='m-0 border-t p-0 even:bg-muted'>
-                  <For each={row}>
-                    {(cell) => (
-                      <td class='border px-4 py-2 text-left [[align=center]]:text-center [[align=right]]:text-right'>
-                        {cell}
-                      </td>
-                    )}
-                  </For>
-                </tr>
-              )}
-            </For>
-          </tbody>
-        </table>
-      </div>
     )
   },
 
