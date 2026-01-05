@@ -21,6 +21,7 @@ This is a **SolidJS + TypeScript + Vite** application with the following technol
 ```bash
 bun run dev     # Start development server (port 3000)
 bun run build   # Build for production
+bun run lint    # Run all checks (lint, format, import sorting)
 bun run serve   # Preview production build
 ```
 

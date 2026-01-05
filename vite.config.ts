@@ -11,12 +11,8 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  build: {
-    target: 'esnext',
-  },
   optimizeDeps: {
-    include: ['debug', 'extend'],
-  },
+    include: ['debug', 'extend']  },
   resolve: {
     alias: {
       '~': resolve(import.meta.dirname, './src'),

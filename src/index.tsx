@@ -4,7 +4,7 @@ import './index.css'
 import { render } from 'solid-js/web'
 
 import App from './app'
-import { ThemeProvider } from './design/theme-provider'
+import { ThemeProvider } from './providers/theme-provider'
 
 const root = document.getElementById('root')
 

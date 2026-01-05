@@ -5,8 +5,8 @@ import remarkMath from 'remark-math'
 import type { Component } from 'solid-js'
 import { createResource, Show } from 'solid-js'
 import { SolidMarkdown } from 'solid-markdown'
-import pkg from '../../package.json'
-import { Typography as CustomTypography } from '../design/custom-typography'
+import pkg from '~/../package.json'
+import { Typography as CustomTypography } from './custom-typography'
 import { Typography as BaseTypography } from './base-typography'
 
 const BASE_REGEX = new RegExp(`^/?${pkg.name}/?`)
