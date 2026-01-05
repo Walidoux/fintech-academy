@@ -18,6 +18,7 @@ import { cn } from '~/lib/utils'
 import pkg from '../../package.json'
 import { Typography as BaseTypography } from './base-typography'
 import { Typography as CustomTypography } from './custom-typography'
+import { Resizable, ResizableHandle, ResizablePanel } from './ui/resizable'
 import { Spinner } from './ui/spinner'
 
 const BASE_REGEX = new RegExp(`^/?${pkg.name}/?`)
@@ -78,6 +79,16 @@ const Docs: Component = () => {
   let hiddenContainerRef: HTMLDivElement | undefined
   const [totalHeight, setTotalHeight] = createSignal(0)
   const [shouldSplit, setShouldSplit] = createSignal(false)
+  const PADDING = 32 // p-8 padding (4 * 8)
+
+  // Calculate approximate height per paragraph
+  const calcApproxHeightPerParagraph = (size: number) => {
+    const avgParagraphHeight = totalHeight() / size
+    const availableHeight = windowHeight() - PADDING
+    const targetHeight = availableHeight / window.devicePixelRatio
+
+    return { targetHeight, avgParagraphHeight }
+  }
 
   function splitMarkdownByHeight(content: string): [string, string, string] {
     if (!content) {
@@ -86,7 +97,6 @@ const Docs: Component = () => {
 
     // Parse markdown to get structure
     const lines = content.split('\n')
-    console.log(lines)
     const paragraphs: string[] = []
     let currentParagraph = ''
 
@@ -103,12 +113,11 @@ const Docs: Component = () => {
       paragraphs.push(currentParagraph)
     }
 
-    // Calculate approximate height per paragraph
-    const avgParagraphHeight = totalHeight() / paragraphs.length
-    const targetHeight = totalHeight() / 3 // 780 px
-    console.log(targetHeight, window.devicePixelRatio)
+    const { targetHeight, avgParagraphHeight } = calcApproxHeightPerParagraph(
+      paragraphs.length
+    )
 
-    // Split into three parts based on target height
+    // Split into three parts based on target height, checking if half of the node is overflowing
     const part1: string[] = []
     const part2: string[] = []
     const part3: string[] = []
@@ -118,23 +127,29 @@ const Docs: Component = () => {
     for (const paragraph of paragraphs) {
       const paragraphHeight = avgParagraphHeight
 
+      if (
+        currentPart === 1 &&
+        currentHeight + paragraphHeight / 2 > targetHeight
+      ) {
+        currentPart = 2
+        currentHeight = 0
+      } else if (
+        currentPart === 2 &&
+        currentHeight + paragraphHeight / 2 > targetHeight
+      ) {
+        currentPart = 3
+        currentHeight = 0
+      }
+
       if (currentPart === 1) {
         part1.push(paragraph)
-        currentHeight += paragraphHeight
-        if (currentHeight >= targetHeight) {
-          // 90% of target
-          currentPart = 2
-          currentHeight = 0
-        }
       } else if (currentPart === 2) {
         part2.push(paragraph)
-        currentHeight += paragraphHeight
-        if (currentHeight >= targetHeight) {
-          currentPart = 3
-        }
       } else {
         part3.push(paragraph)
       }
+
+      currentHeight += paragraphHeight
     }
 
     return [part1.join('\n\n'), part2.join('\n\n'), part3.join('\n\n')]
@@ -156,6 +171,8 @@ const Docs: Component = () => {
     }
     return [markdownContent() || '', '', '']
   })
+
+  const filteredParts = createMemo(() => contentParts().filter((p) => p))
 
   onMount(() => {
     const handleResize = () => setWindowHeight(window.innerHeight)
@@ -181,7 +198,7 @@ const Docs: Component = () => {
         class='invisible absolute overflow-hidden'
         ref={hiddenContainerRef}
         style={{
-          width: 'calc(min(100vw - 64px, 672px))', // equivalent to max-w-3xl + padding
+          width: `calc(min(100vw - ${PADDING}px, 672px))`, // equivalent to max-w-3xl + padding
           top: '-9999px',
         }}>
         <Show when={!markdownContent.loading && markdownContent()}>
@@ -203,18 +220,26 @@ const Docs: Component = () => {
             </article>
           }
           when={shouldSplit()}>
-          <section class='mx-auto grid h-full grid-cols-1 gap-0 md:grid-cols-3'>
-            <For each={contentParts()}>
+          <Resizable class='mx-auto h-full' orientation='horizontal'>
+            <For each={filteredParts()}>
               {(part, index) => (
-                <article
-                  class={cn('flex min-h-0 flex-1 overflow-y-auto p-8', {
-                    'border-foreground/25 border-l': index() > 0,
-                  })}>
-                  {renderMarkdown(part)}
-                </article>
+                <>
+                  <ResizablePanel>
+                    <article
+                      class={cn('flex h-full min-h-0 flex-1 overflow-y-auto', {
+                        'border-foreground/25 border-l': index() > 0,
+                      })}
+                      style={{ padding: `${PADDING}px` }}>
+                      {renderMarkdown(part)}
+                    </article>
+                  </ResizablePanel>
+                  <Show when={index() < filteredParts().length - 1}>
+                    <ResizableHandle withHandle />
+                  </Show>
+                </>
               )}
             </For>
-          </section>
+          </Resizable>
         </Show>
       </Show>
     </>
