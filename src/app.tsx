@@ -1,27 +1,25 @@
-import 'katex/dist/katex.min.css'
+import { MetaProvider, Title } from '@solidjs/meta'
+import { FileRoutes } from '@solidjs/start/router'
+import { type ParentComponent, Suspense } from 'solid-js'
+import './styles.css'
+import { Navbar } from './components/navbar'
 
-import { Route, Router } from '@solidjs/router'
-import type { Component } from 'solid-js'
-
-import pkg from '../package.json'
-import Docs from './components/docs'
-
-const Home: Component = () => {
+const Layout: ParentComponent = (props) => {
   return (
-    <div class='p-8'>
-      <h1 class='font-bold text-2xl'>Financial Analysis Docs</h1>
-      <p>Select a document from the navigation.</p>
-    </div>
+    <>
+      <Navbar />
+      <Suspense>{props.children}</Suspense>
+    </>
   )
 }
 
-const App: Component = () => {
+export default function App() {
   return (
-    <Router base={`/${pkg.name}`}>
-      <Route component={Home} path='/' />
-      <Route component={Docs} path='/docs/*' />
-    </Router>
+    <MetaProvider>
+      <Title>Finance Career</Title>
+      <Layout>
+        <FileRoutes />
+      </Layout>
+    </MetaProvider>
   )
 }
-
-export default App

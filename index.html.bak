@@ -7,9 +7,9 @@
     <title>Lab App</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="app"></div>
 
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <script src="/src/index.tsx" type="module"></script>
+    <script type="module" src="/src/entry-client.tsx"></script>
   </body>
 </html>
