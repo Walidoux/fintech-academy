@@ -1,5 +1,5 @@
 import { type ComponentProps, splitProps } from 'solid-js'
-import { cn } from '~/lib/utils'
+import { cn } from 'tailwind-variants'
 
 export const Table = (props: ComponentProps<'table'>) => {
   const [local, rest] = splitProps(props, ['class'])

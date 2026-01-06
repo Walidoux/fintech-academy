@@ -8,7 +8,7 @@ import { AlertDialog as AlertDialogPrimitive } from '@kobalte/core/alert-dialog'
 import type { PolymorphicProps } from '@kobalte/core/polymorphic'
 import type { ComponentProps, ParentProps, ValidComponent } from 'solid-js'
 import { splitProps } from 'solid-js'
-import { cn } from '~/lib/utils'
+import { cn } from 'tailwind-variants'
 import { buttonVariants } from './button'
 
 export const AlertDialog = AlertDialogPrimitive

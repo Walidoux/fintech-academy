@@ -15,8 +15,7 @@ import type {
 } from 'solid-js'
 import { mergeProps, splitProps } from 'solid-js'
 import { Portal } from 'solid-js/web'
-import { tv, type VariantProps } from 'tailwind-variants'
-import { cn } from '~/lib/utils'
+import { cn, tv, type VariantProps } from 'tailwind-variants'
 
 export const toastVariants = tv({
   base: 'group data-[closed]:fade-out-80 data-[closed]:slide-out-to-top-full data-[closed]:sm:slide-out-to-bottom-full data-[opened]:slide-in-from-top-full data-[opened]:sm:slide-in-from-bottom-full pointer-events-auto relative flex w-full flex-col items-center justify-between gap-3 overflow-hidden rounded-md border p-4 pr-6 shadow-lg transition-all data-[swipe=cancel]:translate-y-0 data-[swipe=end]:translate-y-[var(--kb-toast-swipe-end-y)] data-[swipe=move]:translate-y-[--kb-toast-swipe-move-y] data-[closed]:animate-out data-[opened]:animate-in data-[swipe=end]:animate-out data-[swipe=move]:transition-none',
@@ -94,9 +93,7 @@ export const ToastRegion = <T extends ValidComponent = 'div'>(
   props: PolymorphicProps<T, toastRegionProps<T>>
 ) => {
   const merge = mergeProps<toastRegionProps[]>(
-    {
-      swipeDirection: 'down',
-    },
+    { swipeDirection: 'down' },
     props
   )
 

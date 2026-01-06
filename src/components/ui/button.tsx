@@ -3,8 +3,7 @@ import { Button as ButtonPrimitive } from '@kobalte/core/button'
 import type { PolymorphicProps } from '@kobalte/core/polymorphic'
 import type { ValidComponent } from 'solid-js'
 import { splitProps } from 'solid-js'
-import { tv, type VariantProps } from 'tailwind-variants'
-import { cn } from '~/lib/utils'
+import { cn, tv, type VariantProps } from 'tailwind-variants'
 
 export const buttonVariants = tv({
   base: 'inline-flex items-center justify-center rounded-md font-medium text-sm transition-[color,background-color,box-shadow] focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',

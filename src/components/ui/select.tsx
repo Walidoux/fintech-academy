@@ -7,7 +7,7 @@ import type {
 import { Select as SelectPrimitive } from '@kobalte/core/select'
 import type { ParentProps, ValidComponent } from 'solid-js'
 import { splitProps } from 'solid-js'
-import { cn } from '~/lib/utils'
+import { cn } from 'tailwind-variants'
 
 export const Select = SelectPrimitive
 export const SelectValue = SelectPrimitive.Value

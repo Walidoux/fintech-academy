@@ -5,7 +5,7 @@ import type {
 } from '@kobalte/core/tooltip'
 import { Tooltip as TooltipPrimitive } from '@kobalte/core/tooltip'
 import { mergeProps, splitProps, type ValidComponent } from 'solid-js'
-import { cn } from '~/lib/utils'
+import { cn } from 'tailwind-variants'
 
 export const TooltipTrigger = TooltipPrimitive.Trigger
 

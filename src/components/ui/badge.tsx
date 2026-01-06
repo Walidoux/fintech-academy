@@ -1,6 +1,5 @@
 import { type ComponentProps, splitProps } from 'solid-js'
-import { tv, type VariantProps } from 'tailwind-variants'
-import { cn } from '~/lib/utils'
+import { cn, tv, type VariantProps } from 'tailwind-variants'
 
 export const badgeVariants = tv({
   base: 'inline-flex items-center rounded-md border px-2.5 py-0.5 font-semibold text-xs transition-shadow focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-ring',

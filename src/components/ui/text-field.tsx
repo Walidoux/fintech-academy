@@ -9,8 +9,7 @@ import type {
 import { TextField as TextFieldPrimitive } from '@kobalte/core/text-field'
 import type { ValidComponent, VoidProps } from 'solid-js'
 import { splitProps } from 'solid-js'
-import { tv } from 'tailwind-variants'
-import { cn } from '~/lib/utils'
+import { cn, tv } from 'tailwind-variants'
 
 type textFieldProps<T extends ValidComponent = 'div'> =
   TextFieldRootProps<T> & {

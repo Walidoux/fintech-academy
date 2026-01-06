@@ -7,7 +7,7 @@ import { Image as ImagePrimitive } from '@kobalte/core/image'
 import type { PolymorphicProps } from '@kobalte/core/polymorphic'
 import type { ValidComponent } from 'solid-js'
 import { splitProps } from 'solid-js'
-import { cn } from '~/lib/utils'
+import { cn } from 'tailwind-variants'
 
 type imageRootProps<T extends ValidComponent = 'span'> = ImageRootProps<T> & {
   class?: string
