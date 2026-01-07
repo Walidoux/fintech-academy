@@ -1,9 +1,11 @@
 // Acts like a JSX factory for compiling MDX documents.
 
 import { A } from '@solidjs/router'
+import katex from 'katex'
 import type { Component } from 'solid-js'
+import 'katex/dist/katex.css'
 import { cn } from 'tailwind-variants'
-import { EBITDA as ebitda } from '~/components/ebitda'
+import { RawTable } from '~/components/ebitda'
 import { Separator } from '~/components/ui/separator'
 
 // biome-ignore lint/suspicious/noExplicitAny: different components have different props
@@ -24,7 +26,7 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
     return (
       <h2
         class={cn(
-          'mt-10 scroll-m-20 border-b pb-2 font-semibold text-3xl tracking-tight first:mt-0',
+          'mt-10 scroll-m-20 border-b pb-2 font-semibold text-3xl tracking-tight transition-colors first:mt-0',
           props.class
         )}>
         {props.children}
@@ -36,7 +38,7 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
     return (
       <h3
         class={cn(
-          'mt-6 scroll-m-20 font-semibold text-2xl tracking-tight',
+          'mt-8 scroll-m-20 font-semibold text-2xl tracking-tight',
           props.class
         )}>
         {props.children}
@@ -57,7 +59,19 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
   },
 
   p(props) {
-    return <p {...props} />
+    return <p class={cn('not-first:mt-6 leading-7', props.class)} {...props} />
+  },
+
+  Muted(props) {
+    return (
+      <p
+        class={cn(
+          'not-first:mt-6 text-muted-foreground text-xl leading-7',
+          props.class
+        )}
+        {...props}
+      />
+    )
   },
 
   blockquote(props) {
@@ -94,11 +108,29 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
   b: (props) => <b {...props} />,
   em: (props) => <em {...props} />,
   strong: (props) => <strong {...props} />,
-  li: (props) => <li {...props} />,
+  li(props) {
+    return (
+      <li class={cn('inline-flex items-center', props.class)} {...props}>
+        {props.children}
+      </li>
+    )
+  },
   ol: (props) => <ol {...props} />,
   pre: (props) => <pre {...props} />,
 
-  ebitda,
+  EBITDA: RawTable,
+
+  Math({ children, block = false }: { children: string; block?: boolean }) {
+    return (
+      <span
+        class={block ? 'math-display' : 'math-inline'}
+        innerHTML={katex.renderToString(children, {
+          displayMode: block,
+          throwOnError: false,
+        })}
+      />
+    )
+  },
 
   customsource({ children, className, href, ...props }) {
     return (
