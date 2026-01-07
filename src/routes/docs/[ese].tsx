@@ -2,6 +2,11 @@ import type { RouteSectionProps } from '@solidjs/router'
 import { A } from '@solidjs/router'
 import { allDocs } from 'content-collections'
 import { type Component, For, type ParentComponent } from 'solid-js'
+import {
+  Resizable,
+  ResizableHandle,
+  ResizablePanel,
+} from '~/components/ui/resizable'
 import { categoryMap } from '~/lib/store'
 
 const defaultSubSections = [
@@ -68,7 +73,7 @@ const SideNav: Component<{ ese: string }> = (props) => {
   ]
 
   return (
-    <aside class='sticky flex max-w-xl flex-1 flex-col gap-y-6 overflow-y-auto p-6'>
+    <aside class='flex h-full flex-col gap-y-6 overflow-y-auto p-6'>
       <For each={sections}>
         {(section) => (
           <div class='flex flex-col gap-y-2'>
@@ -87,14 +92,25 @@ const SideNav: Component<{ ese: string }> = (props) => {
   )
 }
 
+const SIZE_PANEL = 0.105
+
 export default function DocsLayout(props: RouteSectionProps) {
   return (
-    <main class='grid h-full grid-cols-[200px_1fr] gap-6'>
-      <SideNav ese={props.params.ese as string} />
-
-      <section class='h-[calc(100vh-65px)] overflow-y-auto border p-6'>
-        {props.children}
-      </section>
+    <main class='h-full'>
+      <Resizable class='h-full' orientation='horizontal'>
+        <ResizablePanel
+          initialSize={SIZE_PANEL}
+          maxSize={SIZE_PANEL + 0.0225}
+          minSize={SIZE_PANEL - 0.0225}>
+          <SideNav ese={props.params.ese as string} />
+        </ResizablePanel>
+        <ResizableHandle />
+        <ResizablePanel initialSize={1 - SIZE_PANEL}>
+          <section class='h-[calc(100vh-65px)] overflow-y-auto p-6'>
+            {props.children}
+          </section>
+        </ResizablePanel>
+      </Resizable>
     </main>
   )
 }
