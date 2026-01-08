@@ -1,5 +1,5 @@
 import { Store } from '@tanstack/solid-store'
-import pkg from '~/../package.json'
+import pkg from '../../package.json'
 
 export const NAV_HEIGHT = 65
 
