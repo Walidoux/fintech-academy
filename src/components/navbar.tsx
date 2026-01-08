@@ -1,3 +1,4 @@
+import { resolvePath } from 'node_modules/@solidjs/router/dist/utils'
 import { NAV_HEIGHT } from '~/lib/store'
 import { ThemeSwitcher } from './theme-switcher'
 
@@ -10,7 +11,7 @@ export const Navbar = () => {
           class='select-none'
           draggable={false}
           height={50}
-          src={import.meta.env.SERVER_BASE_URL.concat('logo.svg')}
+          src={resolvePath(import.meta.env.SERVER_BASE_URL, 'logo.svg')}
           width={50}
         />
         <ThemeSwitcher />
