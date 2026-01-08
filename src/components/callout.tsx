@@ -106,9 +106,9 @@ const config: Record<CalloutType, Callout> = {
     title: 'Astuce',
   },
   note: {
-    icon: () => <TbInfoCircle class='text-blue-200' size={20} />,
-    color: 'bg-blue-900/50 text-blue-100',
-    border: 'border-l-4 border-blue-400',
+    icon: () => <TbInfoCircle class='text-[#646cff] dark:text-blue-200' size={20} />,
+    color: 'dark:bg-blue-900/50 bg-[#646cff14] text-[#454ce1] dark:text-blue-100',
+    border: 'border-l-4 border-[#646cff]',
     title: 'Note',
   },
   caution: {

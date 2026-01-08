@@ -1,15 +1,15 @@
 /** Acts like a JSX factory for compiling MDX documents. */
 import 'katex/dist/katex.css'
 
+import { Checkbox } from '@kobalte/core/checkbox'
 import { A } from '@solidjs/router'
 import katex from 'katex'
-import { createSignal, type Component } from 'solid-js'
+import { type Component, createSignal } from 'solid-js'
 import { cn } from 'tailwind-variants'
 import { Callout } from '~/components/callout'
-import { CheckboxControl } from '~/components/ui/checkbox'
 import { RawTable } from '~/components/raw-table'
+import { CheckboxControl } from '~/components/ui/checkbox'
 import { Separator } from '~/components/ui/separator'
-import { Checkbox } from '@kobalte/core/checkbox'
 
 const createSlug = (text: string) =>
   text.toString().toLowerCase().replace(/\s+/g, '-')
@@ -18,6 +18,9 @@ const taskListRegex = /^\s*(\[[\sx]\])\s*(.+)$/i
 
 export const capitalize = (str: string) =>
   str.charAt(0).toUpperCase() + str.slice(1)
+
+const generateFaviconUrl = (domain: string) =>
+  `https://s2.googleusercontent.com/s2/favicons?domain=${domain}`
 
 // biome-ignore lint/suspicious/noExplicitAny: different components have different props
 export const useMDXComponents: () => Record<string, Component<any>> = () => ({
@@ -119,7 +122,21 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
     )
   },
 
-  a: (props) => <A {...props} />,
+  a: (props) => {
+    console.log(props)
+    return (
+      <A class='inline-flex items-center gap-x-1' href={props.href} {...props}>
+        <img
+          alt='favicon'
+          height={14}
+          src={generateFaviconUrl(props.href)}
+          width={14}
+        />
+        <span class='mt-1 text-primary underline'>{props.children}</span>
+      </A>
+    )
+  },
+
   hr: (props) => <Separator {...props} />,
   i: (props) => <i {...props} />,
   b: (props) => <b {...props} />,
@@ -137,8 +154,8 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
           <li class={cn('inline-flex gap-x-3', props.class)}>
             <Checkbox
               checked={checked()}
-              onClick={() => setChecked(!checked())}
-              class='mt-1 h-fit w-fit'>
+              class='mt-1 h-fit w-fit'
+              onClick={() => setChecked(!checked())}>
               <CheckboxControl />
             </Checkbox>
             {match[2]}
