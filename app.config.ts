@@ -1,6 +1,7 @@
 import contentCollections from '@content-collections/solid-start'
 import { defineConfig } from '@solidjs/start/config'
 import tailwindcss from '@tailwindcss/vite'
+// @ts-expect-error plugin does not export dts
 import pkg from '@vinxi/plugin-mdx'
 import remarkMath from 'remark-math'
 import tsconfigPaths from 'vite-tsconfig-paths'
@@ -37,9 +38,13 @@ export default defineConfig({
   server: {
     preset: 'github-pages',
     static: true,
+    baseURL:
+      process.env.NODE_ENV === 'production' ? `/${APP_NAME.SHORT}/` : '/',
     prerender: {
       crawlLinks: true,
       autoSubfolderIndex: true,
     },
+    // see https://github.com/solidjs/solid-start/issues/1614
+    esbuild: { options: { target: 'esnext' } },
   },
 })
