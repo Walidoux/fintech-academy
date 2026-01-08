@@ -11,7 +11,7 @@ export const Navbar = () => {
           class='select-none'
           draggable={false}
           height={50}
-          src='/logo.svg'
+          src={import.meta.env.SERVER_BASE_URL.concat('logo.svg')}
           width={50}
         />
         <ThemeSwitcher />
