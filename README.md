@@ -23,4 +23,11 @@
 
 ## 📜 Content
 
-- [ ] Documenter sur Manar Conseil, docs can be found under "rapport de stage" in figma and anything related
+## Généralités
+
+- [ ] Consulter les normes comptables/financières (IFRS & IAS)
+
+### Manar Conseil
+
+- [ ] Docs can be found under "rapport de stage" in figma and anything related
+- [ ] Concevoir un organigramme dans le but d’une analyse managériale
