@@ -3,14 +3,18 @@ import 'katex/dist/katex.css'
 
 import { A } from '@solidjs/router'
 import katex from 'katex'
-import type { Component } from 'solid-js'
+import { createSignal, type Component } from 'solid-js'
 import { cn } from 'tailwind-variants'
 import { Callout } from '~/components/callout'
+import { CheckboxControl } from '~/components/ui/checkbox'
 import { RawTable } from '~/components/raw-table'
 import { Separator } from '~/components/ui/separator'
+import { Checkbox } from '@kobalte/core/checkbox'
 
 const createSlug = (text: string) =>
   text.toString().toLowerCase().replace(/\s+/g, '-')
+
+const taskListRegex = /^\s*(\[[\sx]\])\s*(.+)$/i
 
 // biome-ignore lint/suspicious/noExplicitAny: different components have different props
 export const useMDXComponents: () => Record<string, Component<any>> = () => ({
@@ -119,9 +123,24 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
   em: (props) => <em {...props} />,
   strong: (props) => <strong {...props} />,
   li(props) {
+    const children = props.children
+    if (typeof children === 'string') {
+      const match = children.match(taskListRegex)
+      const [checked, setChecked] = createSignal(match ? match[1].toLowerCase() === '[x]' : false)
+      if (match) {
+        return (
+          <li class={cn('inline-flex gap-x-3', props.class)}>
+            <Checkbox checked={checked()} onClick={() => setChecked(!checked())} class="mt-1 w-fit h-fit">
+              <CheckboxControl />
+            </Checkbox>
+            {match[2]}
+          </li>
+        )
+      }
+    }
     return (
       <li class={cn('', props.class)} {...props}>
-        {props.children}
+        {children}
       </li>
     )
   },
