@@ -2,7 +2,7 @@ import { Meta, Title } from '@solidjs/meta'
 import type { RouteSectionProps } from '@solidjs/router'
 import { allDocs } from 'content-collections'
 import { createMemo } from 'solid-js'
-import { APP_NAME } from '~/app'
+import { APP_NAME } from '~/lib/store'
 import { useMDXComponents } from '~/tools/solid-mdx'
 
 const MDXComponents = useMDXComponents()
