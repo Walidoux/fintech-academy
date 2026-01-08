@@ -1,8 +1,9 @@
+import { NAV_HEIGHT } from '~/lib/store'
 import { ThemeSwitcher } from './theme-switcher'
 
 export const Navbar = () => {
   return (
-    <nav class='sticky top-0 flex-1 border-b'>
+    <nav class='border-b' style={{ height: `${NAV_HEIGHT}px` }}>
       <div class='mx-auto flex h-full max-w-6xl items-center justify-between px-3 py-2'>
         <img
           alt='Logo'

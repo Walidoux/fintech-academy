@@ -19,7 +19,7 @@ export default function PandaDocsPage(props: RouteSectionProps) {
   return (
     <>
       <Title>
-        {doc().title} | {APP_NAME}
+        {doc().title} | {APP_NAME.LONG}
       </Title>
       <Meta content={doc().description} name='description' />
       <MDXComponents.h1>{doc().title}</MDXComponents.h1>

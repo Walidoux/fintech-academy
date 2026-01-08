@@ -1,4 +1,5 @@
 import { For } from 'solid-js'
+import { cn } from 'tailwind-variants'
 import {
   Table,
   TableBody,
@@ -11,9 +12,10 @@ import {
 
 export const RawTable = (props: {
   data: { headers: string[]; rows: string[][] }
+  class?: string
 }) => {
   return (
-    <Table>
+    <Table class={cn('mt-4', props.class)}>
       <TableHeader>
         <TableRow>
           <For each={props.data.headers}>

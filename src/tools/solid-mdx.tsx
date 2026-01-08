@@ -5,8 +5,11 @@ import katex from 'katex'
 import type { Component } from 'solid-js'
 import 'katex/dist/katex.css'
 import { cn } from 'tailwind-variants'
-import { RawTable } from '~/components/ebitda'
+import { RawTable } from '~/components/raw-table'
 import { Separator } from '~/components/ui/separator'
+
+const createSlug = (text: string) =>
+  text.toString().toLowerCase().replace(/\s+/g, '-')
 
 // biome-ignore lint/suspicious/noExplicitAny: different components have different props
 export const useMDXComponents: () => Record<string, Component<any>> = () => ({
@@ -16,7 +19,8 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
         class={cn(
           'not-first:mt-6 scroll-m-20 text-balance font-extrabold text-4xl tracking-tight',
           props.class
-        )}>
+        )}
+        id={createSlug(props.children)}>
         {props.children}
       </h1>
     )
@@ -28,7 +32,8 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
         class={cn(
           'mt-10 scroll-m-20 border-b pb-2 font-semibold text-3xl tracking-tight transition-colors first:mt-0',
           props.class
-        )}>
+        )}
+        id={createSlug(props.children)}>
         {props.children}
       </h2>
     )
@@ -40,7 +45,8 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
         class={cn(
           'mt-8 scroll-m-20 font-semibold text-2xl tracking-tight',
           props.class
-        )}>
+        )}
+        id={createSlug(props.children)}>
         {props.children}
       </h3>
     )
@@ -52,7 +58,8 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
         class={cn(
           'mt-4 scroll-m-20 font-semibold text-xl tracking-tight',
           props.class
-        )}>
+        )}
+        id={createSlug(props.children)}>
         {props.children}
       </h4>
     )

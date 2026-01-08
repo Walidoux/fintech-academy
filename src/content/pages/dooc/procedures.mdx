@@ -3,31 +3,36 @@ title: Procédure d'achat et d'inventaire
 ---
 
 <Muted>Cette procédure part du principe qu'elle ne bloque pas les consultants, tout en étant stricte sur les budgets (compliance OCP).</Muted>
+<Muted>Elle servira principalement à sécuriser les dépenses, garantir la conformité éthique et assurer la disponibilité des ressources pour les missions.</Muted>
 
-# Volet 1 : Procédure d'achat (Sourcing et sous-traitance)
+# Volet 1 : Procédure d'achat (P2P)
 
 2 flux critiques peuvent êtres identifiées comme ci-dessous :
 
-- Les achats généraux (fonctionnement) ou frais de structure
-- Les achats de prestations de services intellectuelles (sous-traitance qui peuvent être des experts pointus, voyages, honoraires, etc.)
+- Les achats de structure
+- Les achats de prestations de services intellectuelles
 
 ## Classification des achats
 
-- Catégorie A - Prestations de services : Recours à des experts externes (sous-traitants), formateurs vacataires, partenariats académiques.
-- Catégorie B - EPI pour formations (casques, uniformes, etc.), matériel IT, licences progicielles, fournitures de bureau.
-- Catégorie C - Frais Généraux : Fournitures de bureau, logistique de formation (salles, traiteurs), voyages.
+- Projets : Sous-traitants, formateurs vacataires, partenariats académiques, frais de mission refacturables (vols, hôtels, restaurants).
+- Frais Généraux : EPI pour formations (casques, uniformes, etc.), Fournitures de bureau, IT (matériels et licenses progiciels), services généraux (nettoyage, sécurité locaux).
 
-## Workflow Achat : Scénario d'un consultant
+## Workflow Achat : Scénario d'un consultant senior ou chef de projet
 
-### Étape 1 : Expression du besoin (demande d'achat)
+### Étape 1 : Expression du besoin (DA : Demande d'Achat)
 
-Demandeur d'achat (DA) : Consultant ou chef de projet.
+- **Demandeur d'achat (DA)** : Consultant ou chef de projet.
+- **Action mise en vigueur et moyen déployé** : Création d'une DA dans un ERP/Odoo ou directement sur une feuille de calque Excel.
 
-Requirements : Pour la sous-traitance, la DA doit inclure une Fiche de Mission précise (TJM, livrables, durée) pour éviter le requalification du contrat (délit de marchandage)
+> [!IMPORTANT]
+>
+> Pour la sous-traitance, la DA doit inclure une Fiche de Mission précise (TJM, livrables, durée) pour éviter le requalification du contrat (délit de marchandage) ou une référence du projet si l'achat est lié à une mission (ex: expert externe) pour permettre la refacturation ou le suivi de marge.
 
-Moyen déployé : ERP > Odoo. À l'heure actuelle, la comptabilisation des factures est faite de manière manuelle, à la saisie.
+Il se doit aussi de noter que le consultant fournit au préalable une Fiche de Dotation d'EPI attestant la remise des équipements respectifs par l'entreprise au collaborateur, soit au moment de la prise de poste soit lors de leur renouvellement.
 
-### Étape 2 : Procurment (Sélection/Validation des Frs)
+### Étape 2 : Validation Budgétaire et Technique
+
+Le circuit de validation se justifie selon le besoin,
 
 > Pour les biens (Catégories B et C) : Mise en concurrence simple (3 devis) si montant > X MAD.
 > Pour les experts (Catégorie A) : Validation basée sur la conformité HSE et performance du sous-traitant (assurances RC Pro, habilitations à jour)
@@ -43,4 +48,60 @@ Mention obligatoire des règles HSE de DOOC dans les CGA.
 Biens : Bon de Livraison (BL)
 Services : Accusé de réception. C'est l'élément déclencheur de la facturation.
 
-# Volet 2 : Procédure d'inventaire (Actifs & Matériel Pédagogique)
+### Étape 6 : Facturation
+
+Action : Rapprochement [BC + Réception + Facture]. Paiement selon les délais négociés (ex: 30/60j)
+La facture doit comprendre l'ICA et l'IF de la société et y compris les éléments suivants de base :
+
+Pour un bien facturé :
+
+- Date de facturation
+- Numéro de facture
+- Nom du client
+- Adresse du client
+- Nom du fournisseur
+- Adresse du fournisseur
+- Désignation du produit/service
+- Quantité ou prix unitaire
+- Montant total
+- Montant HT, TTC et TVA
+
+> Matrice de Responsabilités (RACI simplifié)
+
+export const props = { R: "Réalise", "A": "Approbateur", "C": "Consulté", "I": "Informé" }
+export const headers = ["Tâche", "Consultant / Demandeur", "Chef de Projet", "Achats / Admin", "Direction / Finance"]
+export const rows = [
+    ["Achat : Expression Budget (DA)", props.R, props.C, props.I, props.I],
+    ["Achat : Validation Budget", props.I, props.R, props.C, props.I],
+    ["Achat : Négociation & BC", props.I, props.I, props.C, props.I],
+    ["Achat : Validation Service Fait", props.R, props.C, props.I, props.I],
+    ["Inventaire : Maintien du matériel", props.R, props.I, props.I, props.I],
+    ["Inventaire : Comptage Annuel", props.C, props.I, props.R, props.A]
+]
+
+<RawTable data={{ headers, rows }} class="w-[900px]" />
+
+# Volet 2 : Procédure d'inventaire (Gestion des actifs)
+
+## Périmètre de l'inventaire
+
+- Frais généraux section dans [Classification des achats](#classification-des-achats)
+- Stock "Sécurité" & Consommables : EPI (Casques, chaussures de sécurité, gilets fluo logotés DOOC), kits pédagogiques, fournitures.
+
+## Étape 1 : Réception et Identification
+
+Tout matériel IT ou mobilier entrant doit recevoir une étiquette code-barre unique (numéro d'inventaire en comptabilité) qui est par la suite enregistré en base de données au compte de l'actif immobilisé conformément au CGNC comprenant les éléments suivants : Marque, Modèle, N° Série, Date Achat, Valeur, Utilisateur assigné.
+
+## Étape 2 : Validation des données
+
+## Étape 3 : Inventaire physique annuel
+
+Clôture comptable
+
+- Arrêt des mouvements
+- Télédéclaration des impôts à la DGI par SIMPL-IS
+
+## Étape 4 : Analayse des écarts et réforme
+
+Benchmark entre le stock théorique (comptable) et le stock physique.
+Mise en rebut du matériel obsolète ou cassé (ex: casques périmés, PC HS) avec PV de destruction (important pour les normes HSE et environnementales).

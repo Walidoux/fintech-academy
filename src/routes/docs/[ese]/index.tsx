@@ -4,8 +4,8 @@ import { allPages } from 'content-collections'
 import type { Component } from 'solid-js'
 import { createEffect, createSignal, For } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
-import { APP_NAME } from '~/app'
 import { Card, CardContent } from '~/components/ui/card'
+import { APP_NAME } from '~/lib/store'
 
 export default function EsePage(props: RouteSectionProps) {
   const [MDXComp, setMDXComp] = createSignal<Component>()
@@ -31,7 +31,7 @@ export default function EsePage(props: RouteSectionProps) {
   return (
     <>
       <Title>
-        {props.params.ese} | {APP_NAME}
+        {props.params.ese} | {APP_NAME.LONG}
       </Title>
       <Meta content={''} name='description' />
       <Dynamic component={MDXComp()} />
