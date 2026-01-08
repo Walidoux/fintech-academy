@@ -1,8 +1,7 @@
 import type { ButtonRootProps } from '@kobalte/core/button'
 import { Button as ButtonPrimitive } from '@kobalte/core/button'
 import type { PolymorphicProps } from '@kobalte/core/polymorphic'
-import type { ValidComponent } from 'solid-js'
-import { splitProps } from 'solid-js'
+import { splitProps, type ValidComponent } from 'solid-js'
 import { cn, tv, type VariantProps } from 'tailwind-variants'
 
 export const buttonVariants = tv({

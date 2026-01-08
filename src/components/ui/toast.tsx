@@ -7,13 +7,14 @@ import type {
   ToastTitleProps,
 } from '@kobalte/core/toast'
 import { Toast as ToastPrimitive } from '@kobalte/core/toast'
-import type {
-  ComponentProps,
-  ValidComponent,
-  VoidComponent,
-  VoidProps,
+import {
+  type ComponentProps,
+  mergeProps,
+  splitProps,
+  type ValidComponent,
+  type VoidComponent,
+  type VoidProps,
 } from 'solid-js'
-import { mergeProps, splitProps } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { cn, tv, type VariantProps } from 'tailwind-variants'
 

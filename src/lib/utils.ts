@@ -18,6 +18,10 @@ export const createSlug = (text: string): string => {
   return text.toString().toLowerCase().replace(/\s+/g, '-')
 }
 
+export const sanitizeSlug = (text: string): string => {
+  return text.replace(/-/g, ' ').split(' ').map(capitalize).join(' ')
+}
+
 /**
  * Generates a favicon URL from a domain.
  * @param domain - The domain to generate the favicon URL from.

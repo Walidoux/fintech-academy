@@ -1,7 +1,6 @@
 import type { DynamicProps, HandleProps, RootProps } from '@corvu/resizable'
 import ResizablePrimitive from '@corvu/resizable'
-import type { ValidComponent, VoidProps } from 'solid-js'
-import { Show, splitProps } from 'solid-js'
+import { Show, splitProps, type ValidComponent, type VoidProps } from 'solid-js'
 import { cn } from 'tailwind-variants'
 
 export const ResizablePanel = ResizablePrimitive.Panel

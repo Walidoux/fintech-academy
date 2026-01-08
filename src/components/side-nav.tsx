@@ -1,6 +1,7 @@
 import { A } from '@solidjs/router'
-import { For, type Component, type ParentComponent } from 'solid-js'
 import { allDocs } from 'content-collections'
+import { type Component, For, type ParentComponent } from 'solid-js'
+
 import { categoryMap, NAV_HEIGHT } from '~/lib/store'
 
 const defaultSubSections = [
@@ -75,7 +76,9 @@ export const SideNav: Component<{ ese?: string }> = (props) => {
             <h4 class='select-none'>{section.title}</h4>
             <For each={section.links}>
               {(link) => (
-                <SideNavLink href={link.href ?? props.ese}>{link.title}</SideNavLink>
+                <SideNavLink href={link.href ?? props.ese}>
+                  {link.title}
+                </SideNavLink>
               )}
             </For>
           </div>

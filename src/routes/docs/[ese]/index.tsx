@@ -1,14 +1,16 @@
 import { A, type RouteSectionProps } from '@solidjs/router'
 import { allPages } from 'content-collections'
-import type { Component } from 'solid-js'
-import { createEffect, createSignal, For } from 'solid-js'
+import { type Component, createEffect, createSignal, For } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
+
 import { Metadata } from '~/components/metadata'
 import NotFound from '~/components/not-found'
+import { SubNav } from '~/components/sub-nav'
 import { Card, CardContent } from '~/components/ui/card'
 
 export default function EsePage(props: RouteSectionProps) {
   const [MDXComp, setMDXComp] = createSignal<Component>()
+
   const subPages = () =>
     allPages
       .filter(
@@ -36,6 +38,7 @@ export default function EsePage(props: RouteSectionProps) {
   return (
     <>
       <Metadata title={props.params.ese as string} />
+      <SubNav />
       <Dynamic component={MDXComp()} />
       <ul class='mt-6 grid grid-cols-3 gap-3'>
         <For each={subPages()}>

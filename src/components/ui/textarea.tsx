@@ -1,8 +1,7 @@
 import type { PolymorphicProps } from '@kobalte/core/polymorphic'
 import type { TextFieldTextAreaProps } from '@kobalte/core/text-field'
 import { TextArea as TextFieldPrimitive } from '@kobalte/core/text-field'
-import type { ValidComponent, VoidProps } from 'solid-js'
-import { splitProps } from 'solid-js'
+import { splitProps, type ValidComponent, type VoidProps } from 'solid-js'
 import { cn } from 'tailwind-variants'
 
 type textAreaProps<T extends ValidComponent = 'textarea'> = VoidProps<

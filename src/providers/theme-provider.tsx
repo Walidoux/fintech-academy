@@ -1,5 +1,11 @@
-import type { Component, ParentProps } from 'solid-js'
-import { createContext, createEffect, createSignal, useContext } from 'solid-js'
+import {
+  type Component,
+  createContext,
+  createEffect,
+  createSignal,
+  type ParentProps,
+  useContext,
+} from 'solid-js'
 import { isServer } from 'solid-js/web'
 
 type Theme = 'dark' | 'light' | 'system'

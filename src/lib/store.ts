@@ -1,7 +1,7 @@
 import { Store } from '@tanstack/solid-store'
 
 import pkg from '../../package.json'
-import { capitalize } from './utils'
+import { sanitizeSlug } from './utils'
 
 export const NAV_HEIGHT = 65
 
@@ -22,8 +22,8 @@ export const APP = {
   GITHUB_URL: pkg.repository.url,
   DESCRIPTION: pkg.description,
   HOME_PAGE: pkg.homepage,
-  SHORT_NAME: pkg.name, // formatted as a slug
-  LONG_NAME: pkg.name.replace(/-/g, ' ').split(' ').map(capitalize).join(' '),
+  SHORT_NAME: pkg.name,
+  LONG_NAME: sanitizeSlug(pkg.name),
 }
 
 export const categoryMap: Record<string, string> = {

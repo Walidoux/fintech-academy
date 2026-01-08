@@ -6,8 +6,12 @@ import type {
 } from '@kobalte/core/alert-dialog'
 import { AlertDialog as AlertDialogPrimitive } from '@kobalte/core/alert-dialog'
 import type { PolymorphicProps } from '@kobalte/core/polymorphic'
-import type { ComponentProps, ParentProps, ValidComponent } from 'solid-js'
-import { splitProps } from 'solid-js'
+import {
+  type ComponentProps,
+  type ParentProps,
+  splitProps,
+  type ValidComponent,
+} from 'solid-js'
 import { cn } from 'tailwind-variants'
 import { buttonVariants } from './button'
 

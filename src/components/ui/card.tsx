@@ -1,5 +1,4 @@
-import type { ComponentProps, ParentComponent } from 'solid-js'
-import { splitProps } from 'solid-js'
+import { type ComponentProps, type ParentComponent, splitProps } from 'solid-js'
 import { cn } from 'tailwind-variants'
 
 export const Card = (props: ComponentProps<'div'>) => {
