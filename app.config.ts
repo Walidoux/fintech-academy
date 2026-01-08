@@ -38,7 +38,8 @@ export default defineConfig({
   server: {
     preset: 'github-pages',
     static: true,
-    baseURL: `/${APP_NAME.SHORT}`,
+    baseURL:
+      process.env.NODE_ENV === 'development' ? '/' : `/${APP_NAME.SHORT}`,
     prerender: {
       crawlLinks: true,
       autoSubfolderIndex: true,

@@ -18,10 +18,12 @@ const Layout: ParentComponent = (props) => {
 }
 
 export default function App() {
+  console.log(import.meta.env.SERVER_BASE_URL)
   return (
     <ThemeProvider defaultTheme='system' storageKey={`${APP_NAME.SHORT}-theme`}>
       <Router
-        base={`/${APP_NAME.SHORT}`}
+        base={import.meta.env.SERVER_BASE_URL}
+        // base={`/${APP_NAME.SHORT}`}
         root={(props) => (
           <MetaProvider>
             <Title>{APP_NAME.LONG}</Title>
