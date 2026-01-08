@@ -6,6 +6,7 @@ import {
   TbInfoCircle,
 } from 'solid-icons/tb'
 import type { JSXElement, ParentProps } from 'solid-js'
+import { cn } from 'tailwind-variants'
 
 function processBold(text: string): (JSXElement | string)[] {
   const boldRegex = /\*\*(.+?)\*\*/g
@@ -29,9 +30,20 @@ function processBold(text: string): (JSXElement | string)[] {
   return result
 }
 
+function CodeCaption(props: { class?: string; label: string }): JSXElement {
+  return (
+    <code
+      class={cn(
+        'relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm',
+        props.class
+      )}>
+      {props.label}
+    </code>
+  )
+}
+
 function parseMarkdown(text: string): JSXElement[] {
-  const parts = text.split(/(%.*?%)/g)
-  return parts.flatMap((part) => {
+  return text.split(/(%.*?%)/g).flatMap((part) => {
     const codeMatch = part.match(/^%(.*)%$/)
     if (codeMatch) return <CodeCaption label={codeMatch[1].trim()} />
 
