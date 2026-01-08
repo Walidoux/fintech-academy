@@ -1,10 +1,11 @@
-// Acts like a JSX factory for compiling MDX documents.
+/** Acts like a JSX factory for compiling MDX documents. */
+import 'katex/dist/katex.css'
 
 import { A } from '@solidjs/router'
 import katex from 'katex'
 import type { Component } from 'solid-js'
-import 'katex/dist/katex.css'
 import { cn } from 'tailwind-variants'
+import { Callout } from '~/components/callout'
 import { RawTable } from '~/components/raw-table'
 import { Separator } from '~/components/ui/separator'
 
@@ -13,6 +14,8 @@ const createSlug = (text: string) =>
 
 // biome-ignore lint/suspicious/noExplicitAny: different components have different props
 export const useMDXComponents: () => Record<string, Component<any>> = () => ({
+  Callout,
+
   h1(props) {
     return (
       <h1
