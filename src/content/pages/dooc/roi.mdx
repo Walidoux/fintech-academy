@@ -1,0 +1,94 @@
+---
+title: Retour Sur Investissement
+---
+
+export const tx = 2
+export const costs = 5000000
+
+# Return On Investment (ROI)
+
+- En réduisant les arrêts machine de {tx}%, nous économisons X dirhams par an, ce qui couvre le coût du projet en 6 mois.
+- Modélisez l'impact des gains de productivité sur l'EBITDA du client.
+
+## Étape 1 : Collecter les variables clés (Les Hypothèses)
+Avant de calculer, il faut définir les données d'entrée. Dans un contexte industriel (usine, mine), voici ce que vous devez demander aux ingénieurs :
+
+1. Capacité de production théorique : Combien l'usine produit-elle par heure si tout va bien ? (ex: $\text{100 tonnes / heure}$).
+2. Temps d'ouverture : Combien d'heures l'usine tourne par an ? (ex: 24h/24, 300 jours/an = 7 200 heures).
+3. Le Gain de disponibilité (l'objectif) : Le fameux $$\js{tx}\%$$ de réduction d'arrêts.
+4. Prix de vente unitaire : À combien se vend la tonne de produit fini (ex: $$\text{engrais}$$).
+5. Coût Variable unitaire : Pour produire une tonne de plus, combien ça coûte en matières premières, énergie, réactifs ? (Ne pas inclure les salaires fixes ou l'amortissement ici).
+6. Coût du Projet (Investissement) : Honoraires DooC + Achat matériel + Formation.
+
+## Étape 2 : Le calcul du Gain Financier (Le "Cash Flow")
+
+L'erreur du débutant est de dire : "On produit 2% de plus, donc on gagne 2% du Chiffre d'Affaires". C'est faux. Pour produire ces 2% supplémentaires, vous allez consommer de l'électricité et de la matière première.
+
+> $$ \text{Gain Financier (MCV)} = \text{Volume Supplémentaire} \times (\text{Prix de Vente} - \text{Coût Variable}) $$.
+
+## Étape 3 : Cas Pratique (Simulation Chiffrée)
+
+Imaginons une unité de production d'engrais chez un client OCP.
+
+### A. Les Données :
+
+### B. L'impact opérationnel :
+
+Grâce au projet, on réduit les pannes. L'usine tourne plus longtemps. <br />
+Gain de volume : $\js{costs} \text{tonnes} \times \js{tx}\% = \text{100000 tonnes}$
+
+### C. Le Gain Financier Annuel :
+
+$$\text{100000 tonnes} \times \text{1500 MAD (Marge)} = \text{150000000 MAD (15 MDH)}$$
+
+### D: Calcul du ROI et Playback :
+
+ROI (Retour sur Investissement) 1ère année : $$ \text{ROI} = \frac{\text{Gain} - \text{Coût}}{\text{Coût}} = \frac{15M - 5M}{5M} = 200\% $$ <br /> *Interprétation : Pour chaque dirham investi dans le projet DooC, le client récupère 2 dirhams de profit net la première année.*
+
+Payback Period (Retour sur investissement en temps) : $$ \text{Temps} = \frac{\text{Coût du projet}}{\text{Gain Annuel}} = \frac{5 000 000}{15 000 000} = 0,33 \text{année} $$ <br /> *Soit : $$\text{0,33} \times \text{12} = 4 $$ mois. Tout ce qui suit est du pur bénéfice.*
+
+## Étape 4 : Modéliser l'impact sur l'EBITDA
+
+C'est ici que vous impressionnez le Directeur Financier. Vous devez montrer l'effet de levier opérationnel.
+
+L'EBITDA (Excédent Brut d'Exploitation) se calcule ainsi : $$ \text{EBITDA} = \text{Marge sur Coût Variable} - \text{Coûts Fixes} $$
+
+La démonstration à faire : Puisque vos coûts fixes (salaires des employés de l'usine, loyer, maintenance générale) sont déjà payés, chaque dirham de marge supplémentaire généré par votre projet tombe directement dans l'EBITDA.
+
+export const headers = [
+  "Ligne du P&L (Compte de résultat)",
+  "Situation actuelle",
+  "Situation après projet (+2% Vol)",
+  "Variation",
+  "Commentaire",
+];
+
+export const rows = [
+  ["Volume (Tonnes)", "500_000", "510_000", "+10k", "+2% Productivité"],
+  ["Chiffre d'affaires (4k/t)", "2000", "2040", "+40", ""],
+  [
+    "(-) Coûts Variables (2.5k/t)",
+    "(1250 MDH)",
+    "1275 MDH",
+    "-25 MDH",
+    "Augmentent avec le volume",
+  ],
+  ["= Marge sur Coûts Variables", "750 MDH", "765 MDH", "+15 MDH", ""],
+  [
+    "(-) Coûts Fixes (Salaires, etc.)",
+    "(400 MDH)",
+    "(400 MDH)",
+    "0",
+    "Ne bougent pas !",
+  ],
+  ["= EBITDA", "350 MDH", "365 MDH", "+15 MDH", "Impact dur"],
+  [
+    "Merge EBITDA",
+    "17.5%",
+    "17.9%",
+    "+0.4 pts",
+    "Amélioration de la rentabilité globale",
+  ]
+];
+
+<RawTable data={{headers, rows}} />
