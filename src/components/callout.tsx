@@ -8,13 +8,19 @@ import {
 import type { JSXElement, ParentProps } from 'solid-js'
 import { cn } from 'tailwind-variants'
 
+const codeRegex = /^%(.*)%$/
+
 function processBold(text: string): (JSXElement | string)[] {
   const boldRegex = /\*\*(.+?)\*\*/g
   const result: (JSXElement | string)[] = []
   let lastIndex = 0
   let match: RegExpExecArray | null
 
-  while ((match = boldRegex.exec(text)) !== null) {
+  while (true) {
+    match = boldRegex.exec(text)
+    if (match === null) {
+      break
+    }
     if (match.index > lastIndex) {
       result.push(text.slice(lastIndex, match.index))
     }
@@ -44,15 +50,21 @@ function CodeCaption(props: { class?: string; label: string }): JSXElement {
 
 function parseMarkdown(text: string): JSXElement[] {
   return text.split(/(%.*?%)/g).flatMap((part) => {
-    const codeMatch = part.match(/^%(.*)%$/)
-    if (codeMatch) return <CodeCaption label={codeMatch[1].trim()} />
+    const codeMatch = part.match(codeRegex)
+    if (codeMatch) {
+      return <CodeCaption label={codeMatch[1].trim()} />
+    }
 
     const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g
     const nodes: JSXElement[] = []
     let lastIndex = 0
     let match: RegExpExecArray | null
 
-    while ((match = linkRegex.exec(part)) !== null) {
+    while (true) {
+      match = linkRegex.exec(part)
+      if (match === null) {
+        break
+      }
       if (match.index > lastIndex) {
         nodes.push(...processBold(part.slice(lastIndex, match.index)))
       }
@@ -100,7 +112,9 @@ const config: Record<CalloutType, Callout> = {
     title: 'Note',
   },
   caution: {
-    icon: () => <TbAlertTriangle class='text-[#915930] dark:text-yellow-200' size={18} />,
+    icon: () => (
+      <TbAlertTriangle class='text-[#915930] dark:text-yellow-200' size={18} />
+    ),
     color:
       'bg-[#eab30824] dark:bg-yellow-900/50 text-black dark:text-yellow-100',
     border: 'border-l-4 border-yellow-400',
@@ -125,7 +139,11 @@ export function Callout(props: Partial<CallProps>): JSXElement {
     <div class={`${color} ${border} my-4 flex flex-col gap-2 rounded-r-md p-4`}>
       <div class='inline-flex items-center gap-2'>
         <Icon />
-        <span class='mt-0.5 font-semibold'>{title.toUpperCase().concat(Boolean(props.subject) ? ` : ${props.subject}` : '')}</span>
+        <span class='mt-0.5 font-semibold'>
+          {title
+            .toUpperCase()
+            .concat(props.subject ? ` : ${props.subject}` : '')}
+        </span>
       </div>
       <div class='text-sm'>{parseMarkdown(props.children as string)}</div>
     </div>

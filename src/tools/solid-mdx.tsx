@@ -16,7 +16,8 @@ const createSlug = (text: string) =>
 
 const taskListRegex = /^\s*(\[[\sx]\])\s*(.+)$/i
 
-export const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)
+export const capitalize = (str: string) =>
+  str.charAt(0).toUpperCase() + str.slice(1)
 
 // biome-ignore lint/suspicious/noExplicitAny: different components have different props
 export const useMDXComponents: () => Record<string, Component<any>> = () => ({
@@ -128,11 +129,16 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
     const children = props.children
     if (typeof children === 'string') {
       const match = children.match(taskListRegex)
-      const [checked, setChecked] = createSignal(match ? match[1].toLowerCase() === '[x]' : false)
+      const [checked, setChecked] = createSignal(
+        match ? match[1].toLowerCase() === '[x]' : false
+      )
       if (match) {
         return (
           <li class={cn('inline-flex gap-x-3', props.class)}>
-            <Checkbox checked={checked()} onClick={() => setChecked(!checked())} class="mt-1 w-fit h-fit">
+            <Checkbox
+              checked={checked()}
+              onClick={() => setChecked(!checked())}
+              class='mt-1 h-fit w-fit'>
               <CheckboxControl />
             </Checkbox>
             {match[2]}

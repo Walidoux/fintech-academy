@@ -45,8 +45,10 @@ export default function EsePage(props: RouteSectionProps) {
         <For each={subPages()}>
           {(page) => (
             <Card class='min-h-12'>
-              <CardContent class='p-0 h-full flex items-center'>
-                <A class="px-4 py-2 w-full" href={`/docs/${props.params.ese}/${page.slug}`}>
+              <CardContent class='flex h-full items-center p-0'>
+                <A
+                  class='w-full px-4 py-2'
+                  href={`/docs/${props.params.ese}/${page.slug}`}>
                   {page.title}
                 </A>
               </CardContent>
