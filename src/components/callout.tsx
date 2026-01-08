@@ -91,16 +91,16 @@ const config: Record<CalloutType, Callout> = {
     icon: () => <TbBulb class='text-purple-200' />,
     color: 'bg-purple-900/50 text-purple-100',
     border: 'border-l-4 border-purple-400',
-    title: 'Conseil de pro',
+    title: 'Astuce',
   },
   note: {
-    icon: () => <TbInfoCircle class='text-blue-200' />,
+    icon: () => <TbInfoCircle class='text-blue-200' size={20} />,
     color: 'bg-blue-900/50 text-blue-100',
     border: 'border-l-4 border-blue-400',
     title: 'Note',
   },
   caution: {
-    icon: () => <TbAlertTriangle class='text-[#915930] dark:text-yellow-200' />,
+    icon: () => <TbAlertTriangle class='text-[#915930] dark:text-yellow-200' size={18} />,
     color:
       'bg-[#eab30824] dark:bg-yellow-900/50 text-black dark:text-yellow-100',
     border: 'border-l-4 border-yellow-400',
@@ -114,18 +114,18 @@ const config: Record<CalloutType, Callout> = {
   },
 }
 
-export function Callout(
-  props: ParentProps<{
-    type?: CalloutType
-    title?: string
-  }>
-): JSXElement {
+interface CallProps extends ParentProps {
+  type: CalloutType
+  subject: string
+}
+
+export function Callout(props: Partial<CallProps>): JSXElement {
   const { title, border, color, icon: Icon } = config[props.type ?? 'note']
   return (
     <div class={`${color} ${border} my-4 flex flex-col gap-2 rounded-r-md p-4`}>
-      <div class='mb-1 flex items-center gap-2'>
+      <div class='inline-flex items-center gap-2'>
         <Icon />
-        <span class='font-semibold'>{title.toUpperCase()}</span>
+        <span class='mt-0.5 font-semibold'>{title.toUpperCase().concat(Boolean(props.subject) ? ` : ${props.subject}` : '')}</span>
       </div>
       <div class='text-sm'>{parseMarkdown(props.children as string)}</div>
     </div>

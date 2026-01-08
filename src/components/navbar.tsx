@@ -6,11 +6,15 @@ import { cn } from 'tailwind-variants'
 import { APP, NAV_HEIGHT } from '~/lib/store'
 import { ThemeSwitcher } from './theme-switcher'
 
-const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)
 
 export const Navbar = () => {
   type StatusType = 'online' | 'offline' | 'idle'
   const [status, setStatus] = createSignal<StatusType>('idle')
+  const labelsDict = {
+    online: 'En ligne',
+    offline: 'Hors-ligne',
+    idle: 'Inactif'
+  }
 
   createEffect(() => {
     fetch(APP.HOME_PAGE, { mode: 'no-cors' })
@@ -43,7 +47,7 @@ export const Navbar = () => {
                   'bg-red-500': status() === 'offline',
                 })}
               />
-              {capitalize(status())}
+              {labelsDict[status()]}
             </A>
           </Show>
           <A

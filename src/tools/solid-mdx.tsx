@@ -16,6 +16,8 @@ const createSlug = (text: string) =>
 
 const taskListRegex = /^\s*(\[[\sx]\])\s*(.+)$/i
 
+export const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)
+
 // biome-ignore lint/suspicious/noExplicitAny: different components have different props
 export const useMDXComponents: () => Record<string, Component<any>> = () => ({
   Callout,
