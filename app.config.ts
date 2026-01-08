@@ -41,6 +41,7 @@ export default defineConfig({
     static: true,
     prerender: {
       crawlLinks: true,
+      autoSubfolderIndex: true,
     },
     // see https://github.com/solidjs/solid-start/issues/1614
     esbuild: { options: { target: 'esnext' } },
