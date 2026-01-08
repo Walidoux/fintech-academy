@@ -119,8 +119,27 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
   }
+
   #app {
     @apply font-sans bg-background text-foreground h-screen max-w-screen overflow-hidden;
+  }
+
+  /* Custom scrollbar styling. */
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 5px;
   }
 }
