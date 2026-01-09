@@ -53,7 +53,7 @@ const config: Record<CalloutType, Callout> = {
       <TbAlertTriangle class='text-[#915930] dark:text-yellow-200' size={18} />
     ),
     color:
-      'bg-[#eab30824] dark:bg-yellow-900/50 text-black dark:text-yellow-100',
+      'bg-[#eab30824] dark:bg-yellow-900/50 text-[#915930] dark:text-yellow-100',
     border: 'border-l-4 border-yellow-400',
     title: 'Caution',
   },

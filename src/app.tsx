@@ -6,6 +6,7 @@ import { FileRoutes } from '@solidjs/start/router'
 import { type JSXElement, type ParentComponent, Suspense } from 'solid-js'
 import { Metadata } from './components/metadata'
 import { Navbar } from './components/navbar'
+import { ToastList, ToastRegion } from './components/ui/toast'
 import { APP } from './lib/store'
 import { ThemeProvider } from './providers/theme-provider'
 
@@ -27,6 +28,9 @@ export default function App() {
           <MetaProvider>
             <Metadata title='Site' />
             <Layout>{props.children}</Layout>
+            <ToastRegion>
+              <ToastList />
+            </ToastRegion>
           </MetaProvider>
         )}>
         <FileRoutes />

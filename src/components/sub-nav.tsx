@@ -1,7 +1,8 @@
+import { toaster } from '@kobalte/core/toast'
 import { A, type Location } from '@solidjs/router'
 import { BsPen } from 'solid-icons/bs'
+import { TbCircleCheck } from 'solid-icons/tb'
 import { createMemo, For, Show } from 'solid-js'
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,6 +12,8 @@ import {
 } from '~/components/ui/breadcrumbs'
 import { sanitizeSlug } from '~/lib/utils'
 import { internships } from './side-nav'
+import { Button } from './ui/button'
+import { Toast, ToastContent, ToastDescription, ToastTitle } from './ui/toast'
 
 export function SubNav<T>(props: Partial<Location<T>>) {
   const segments = props.pathname?.split('/').filter(Boolean)
@@ -49,8 +52,22 @@ export function SubNav<T>(props: Partial<Location<T>>) {
     return `${srcDir}/${docDir}.mdx`
   })
 
+  const showToastRedirection = () => {
+    toaster.show((props) => (
+      <Toast toastId={props.toastId}>
+        <ToastContent>
+          <TbCircleCheck class='row-span-2 my-auto text-primary' size={24} />
+          <ToastTitle>Document ouvert</ToastTitle>
+          <ToastDescription>
+            Consultez-le depuis votre IDE si ce dernier est ouvert.
+          </ToastDescription>
+        </ToastContent>
+      </Toast>
+    ))
+  }
+
   return (
-    <nav class='flex flex-items justify-between'>
+    <nav class='flex items-center justify-between'>
       <Breadcrumb>
         <BreadcrumbList>
           <For each={segments}>
@@ -73,10 +90,12 @@ export function SubNav<T>(props: Partial<Location<T>>) {
         </BreadcrumbList>
       </Breadcrumb>
       <Show when={process.env.NODE_ENV === 'development'}>
-        <A class='inline-flex items-center gap-x-2' href={redirectSrcFile()}>
-          <BsPen class='mb-0.5' />
-          Edit File
-        </A>
+        <Button onClick={showToastRedirection} variant='outline'>
+          <A class='inline-flex items-center gap-x-2' href={redirectSrcFile()}>
+            <BsPen />
+            Modifier
+          </A>
+        </Button>
       </Show>
     </nav>
   )
