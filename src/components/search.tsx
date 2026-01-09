@@ -6,7 +6,6 @@ import {
   createSignal,
   For,
   onCleanup,
-  Show,
   splitProps,
 } from 'solid-js'
 import { cn } from 'tailwind-variants'
@@ -134,51 +133,32 @@ const CommandMenu = () => {
               <CommandEmpty class='py-12 text-center text-muted-foreground text-sm'>
                 Aucun résultat trouvé.
               </CommandEmpty>
-              <For each={allDocs}>
-                {(doc) => (
+              <For each={Object.entries(categoryMap)}>
+                {([category, name]) => (
                   <CommandGroup
                     class='p-0! **:[[cmdk-group-heading]]:scroll-mt-16 **:[[cmdk-group-heading]]:p-3! **:[[cmdk-group-heading]]:pb-1!'
-                    heading={categoryMap[doc.category]}>
-                    <For
-                      each={allDocs.filter((d) => d.category === doc.category)}>
+                    heading={name}>
+                    <For each={allDocs.filter((d) => d.category === category)}>
                       {(item) => {
-                        const isComponent = () =>
-                          /^\/docs\/components\/(.*)?$/gm.test(doc._meta.path)
-
                         return (
                           <CommandMenuItem
                             onSelect={() => {
-                              runCommand(() => navigate({ to: doc._meta.path }))
+                              runCommand(() =>
+                                navigate(`/docs/${item._meta.path}`)
+                              )
                             }}>
-                            <Show
-                              fallback={
-                                <svg
-                                  class='mr-2 h-4 w-4'
-                                  viewBox='0 0 24 24'
-                                  xmlns='http://www.w3.org/2000/svg'>
-                                  <path
-                                    clip-rule='evenodd'
-                                    d='M4.172 3.172C3 4.343 3 6.229 3 10v4c0 3.771 0 5.657 1.172 6.828C5.343 22 7.229 22 11 22h2c3.771 0 5.657 0 6.828-1.172C21 19.657 21 17.771 21 14v-4c0-3.771 0-5.657-1.172-6.828C18.657 2 16.771 2 13 2h-2C7.229 2 5.343 2 4.172 3.172M8 9.25a.75.75 0 0 0 0 1.5h8a.75.75 0 0 0 0-1.5zm0 4a.75.75 0 0 0 0 1.5h5a.75.75 0 0 0 0-1.5z'
-                                    fill='currentColor'
-                                    fill-rule='evenodd'
-                                  />
-                                  <title>Doc</title>
-                                </svg>
-                              }
-                              when={isComponent()}>
-                              <svg
-                                viewBox='0 0 24 24'
-                                xmlns='http://www.w3.org/2000/svg'>
-                                <path
-                                  d='M15.536 11.293a1 1 0 0 0 0 1.414l2.376 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0zm-13.239 0a1 1 0 0 0 0 1.414l2.377 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414L6.088 8.916a1 1 0 0 0-1.414 0zm6.619 6.619a1 1 0 0 0 0 1.415l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.415l-2.377-2.376a1 1 0 0 0-1.414 0zm0-13.238a1 1 0 0 0 0 1.414l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z'
-                                  fill='none'
-                                  stroke='currentColor'
-                                  stroke-linecap='round'
-                                  stroke-linejoin='round'
-                                  stroke-width='2'
-                                />
-                              </svg>
-                            </Show>
+                            <svg
+                              class='mr-2 h-4 w-4'
+                              viewBox='0 0 24 24'
+                              xmlns='http://www.w3.org/2000/svg'>
+                              <path
+                                clip-rule='evenodd'
+                                d='M4.172 3.172C3 4.343 3 6.229 3 10v4c0 3.771 0 5.657 1.172 6.828C5.343 22 7.229 22 11 22h2c3.771 0 5.657 0 6.828-1.172C21 19.657 21 17.771 21 14v-4c0-3.771 0-5.657-1.172-6.828C18.657 2 16.771 2 13 2h-2C7.229 2 5.343 2 4.172 3.172M8 9.25a.75.75 0 0 0 0 1.5h8a.75.75 0 0 0 0-1.5zm0 4a.75.75 0 0 0 0 1.5h5a.75.75 0 0 0 0-1.5z'
+                                fill='currentColor'
+                                fill-rule='evenodd'
+                              />
+                              <title>Doc</title>
+                            </svg>
 
                             {item.title}
                           </CommandMenuItem>

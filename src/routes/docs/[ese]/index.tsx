@@ -40,7 +40,7 @@ export default function EsePage(props: RouteSectionProps) {
     <>
       <Metadata title={props.params.ese as string} />
       <SubNav pathname={pathname} />
-      <main class='mt-6 overflow-y-auto'>
+      <main class='overflow-y-auto p-6 pt-0'>
         <Dynamic component={MDXComp()} />
         <ul class='mt-6 grid grid-cols-3 gap-3'>
           <For each={subPages()}>

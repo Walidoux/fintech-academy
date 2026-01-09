@@ -1,8 +1,9 @@
 import { A } from '@solidjs/router'
+import { useStore } from '@tanstack/solid-store'
 import { allDocs } from 'content-collections'
-import { type Component, For, type ParentComponent } from 'solid-js'
+import { type Component, For, type ParentComponent, Show } from 'solid-js'
 
-import { categoryMap, NAV_HEIGHT } from '~/lib/store'
+import { categoryMap, NAV_HEIGHT, store } from '~/lib/store'
 
 const defaultSubSections = [
   {
@@ -40,6 +41,8 @@ const SideNavLink: ParentComponent<{ href: string }> = (props) => {
 }
 
 export const SideNav: Component<{ ese?: string }> = (props) => {
+  const open = useStore(store, (state) => state.sideNavOpen)
+
   const sections = [
     ...defaultSubSections,
     ...internships,
@@ -67,23 +70,25 @@ export const SideNav: Component<{ ese?: string }> = (props) => {
   ]
 
   return (
-    <aside
-      class='flex flex-col gap-y-6 overflow-y-auto border-r p-6'
-      style={{ height: `calc(100vh - ${NAV_HEIGHT}px)` }}>
-      <For each={sections}>
-        {(section) => (
-          <div class='flex flex-col gap-y-2'>
-            <h4 class='select-none'>{section.title}</h4>
-            <For each={section.links}>
-              {(link) => (
-                <SideNavLink href={link.href ?? props.ese}>
-                  {link.title}
-                </SideNavLink>
-              )}
-            </For>
-          </div>
-        )}
-      </For>
-    </aside>
+    <Show when={open}>
+      <aside
+        class='flex flex-col gap-y-6 overflow-y-auto border-r p-6'
+        style={{ height: `calc(100vh - ${NAV_HEIGHT}px)` }}>
+        <For each={sections}>
+          {(section) => (
+            <div class='flex flex-col gap-y-2'>
+              <h4 class='select-none'>{section.title}</h4>
+              <For each={section.links}>
+                {(link) => (
+                  <SideNavLink href={link.href ?? props.ese}>
+                    {link.title}
+                  </SideNavLink>
+                )}
+              </For>
+            </div>
+          )}
+        </For>
+      </aside>
+    </Show>
   )
 }

@@ -37,5 +37,5 @@ export const categoryMap: Record<string, string> = {
 export const categoriesKeys = Object.keys(categoryMap) as [string, ...string[]]
 
 export const store = new Store({
-  sideNavOpen: false,
+  sideNavOpen: true,
 })

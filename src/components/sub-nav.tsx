@@ -40,7 +40,6 @@ export function SubNav<T>(props: Partial<Location<T>>) {
 
     let docDir = segments?.join('/')
 
-    console.log(docDir)
     if (
       internships[0].links.find((link) => link.href.includes(docDir as string))
     ) {

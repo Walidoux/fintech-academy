@@ -10,6 +10,7 @@ import { cn } from 'tailwind-variants'
 import { Callout } from '~/components/callout'
 import { DataTable } from '~/components/data-table'
 import { RawTable } from '~/components/raw-table'
+import { Button } from '~/components/ui/button'
 import { CheckboxControl } from '~/components/ui/checkbox'
 import { Separator } from '~/components/ui/separator'
 import { REGEX } from '~/lib/store'
@@ -19,6 +20,7 @@ import { createSlug, generateFaviconUrl } from '~/lib/utils'
 export const useMDXComponents: () => Record<string, Component<any>> = () => ({
   Callout,
   DataTable,
+  Button,
 
   h1(props) {
     return (

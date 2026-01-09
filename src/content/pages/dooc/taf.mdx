@@ -2,35 +2,62 @@
 title: TAF
 ---
 
+import { BsArrowDown, BsArrowUp } from 'solid-icons/bs'
+
 export const cols = [
     { accessorKey: "ref", header: "Ref." },
+    { accessorKey: "frs", header: "Fournisseur" },
     { accessorKey: "date", header: "Date de réception" },
-    { accessorKey: "type", header: "Type" },
-    { accessorKey: "price", header: "Price Checked in IA" },
+    {
+        accessorKey: "type",
+        header: ({ column }) => {
+            return (
+                <span>
+                    Type
+                </span>
+            )
+        }
+    },
+    {
+        accessorKey: "checked",
+        header: ({ column }) => {
+            return (
+                <span
+                    class="gap-x-2 flex items-center cursor-pointer hover:text-black"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+                    Price Checked in IA
+                    {column.getIsSorted() === "desc" ? <BsArrowUp /> : <BsArrowDown />}
+                </span>
+            )
+        }
+    },
     { accessorKey: "attachment", header: "DAR/Good receipt/Check Attached" }
 ];
 
-export const data = [
-    { id: "000680", ref: "000680", date: "05/08/2025", type: "Project", price: "No", attachment: "Yes" },
-    { id: "000681", ref: "000681", date: "04/08/2025", type: "Project", price: "No", attachment: "No (DAR à faire, signer par: El Kiri)" },
-    { id: "000682", ref: "000682", date: "05/08/2025", type: "Project", price: "No", attachment: "Yes" },
-    { id: "000683", ref: "000683", date: "04/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000684", ref: "000684", date: "04/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000685", ref: "000685", date: "05/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000686", ref: "000686", date: "05/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000687", ref: "000687", date: "05/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000688", ref: "000688", date: "05/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000689", ref: "000689", date: "04/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000690", ref: "000690", date: "04/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000691", ref: "000691", date: "01/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000692", ref: "000692", date: "04/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000693", ref: "000693", date: "06/08/2025", type: "Purchase", price: "No", attachment: "No" },
-    { id: "000694", ref: "000694", date: "06/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000695", ref: "000695", date: "06/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000696", ref: "000696", date: "06/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000697", ref: "000697", date: "06/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000698", ref: "000698", date: "07/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
-    { id: "000699", ref: "000699", date: "07/08/2025", type: "Purchase", price: "No", attachment: "Yes" },
+export const data = () => [
+    { id: "000680", frs: "You5safe", ref: "000680", date: "05/08/2025", type: "Project", checked: "No", attachment: "Yes" },
+    { id: "000681", frs: "You5safe", ref: "000681", date: "04/08/2025", type: "Project", checked: "No", attachment: "No (DAR à faire, signer par: El Kiri)" },
+    { id: "000682", frs: "Excellence HSE SARL", ref: "000682", date: "05/08/2025", type: "Project", checked: "No", attachment: "Yes" },
+    { id: "000683", frs: "", ref: "000683", date: "04/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000684", frs: "", ref: "000684", date: "04/08/2025", type: "Purchase", checked: "Yes", attachment: "Yes" },
+    { id: "000685", frs: "", ref: "000685", date: "05/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000686", frs: "", ref: "000686", date: "05/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000687", frs: "", ref: "000687", date: "05/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000688", frs: "", ref: "000688", date: "05/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000689", frs: "", ref: "000689", date: "04/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000690", frs: "", ref: "000690", date: "04/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000691", frs: "", ref: "000691", date: "01/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000692", frs: "", ref: "000692", date: "04/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000693", frs: "", ref: "000693", date: "06/08/2025", type: "Purchase", checked: "No", attachment: "No" },
+    { id: "000694", frs: "", ref: "000694", date: "06/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000695", frs: "", ref: "000695", date: "06/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000696", frs: "", ref: "000696", date: "06/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000697", frs: "", ref: "000697", date: "06/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000698", frs: "", ref: "000698", date: "07/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000699", frs: "", ref: "000699", date: "07/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000700", frs: "", ref: "000700", date: "07/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000701", frs: "", ref: "000701", date: "07/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
+    { id: "000702", frs: "", ref: "000702", date: "07/08/2025", type: "Purchase", checked: "No", attachment: "Yes" },
 ]
 
 <DataTable columns={cols} data={data} />
