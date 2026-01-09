@@ -182,6 +182,7 @@ const CommandMenu = () => {
                     stroke-width='2'>
                     <path d='M20 4v7a4 4 0 0 1-4 4H4' />
                     <path d='m9 10l-5 5l5 5' />
+                    <title>Command</title>
                   </g>
                 </svg>
               </CommandKbd>{' '}

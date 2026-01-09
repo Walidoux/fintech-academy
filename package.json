@@ -45,6 +45,7 @@
     "@solidjs/start": "^1.0.10",
     "@tanstack/solid-store": "^0.5.7",
     "@tanstack/solid-table": "^8.21.3",
+    "@unovis/solid": "^1.6.2",
     "@vinxi/plugin-mdx": "^3.7.2",
     "clsx": "^2.1.1",
     "cmdk-solid": "^1.1.2",

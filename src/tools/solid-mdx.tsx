@@ -11,6 +11,8 @@ import { Callout } from '~/components/callout'
 import { DataTable } from '~/components/data-table'
 import { RawTable } from '~/components/raw-table'
 import { Button } from '~/components/ui/button'
+import BarChart from '~/components/ui/charts/bar-chart'
+import LineChart from '~/components/ui/charts/line-chart'
 import { CheckboxControl } from '~/components/ui/checkbox'
 import { Separator } from '~/components/ui/separator'
 import { REGEX } from '~/lib/store'
@@ -21,6 +23,9 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
   Callout,
   DataTable,
   Button,
+
+  BarChart,
+  LineChart,
 
   h1(props) {
     return (

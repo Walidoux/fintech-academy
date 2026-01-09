@@ -1,4 +1,6 @@
 import { Store } from '@tanstack/solid-store'
+import { createSignal, onCleanup } from 'solid-js'
+import { isServer } from 'solid-js/web'
 
 import pkg from '../../package.json'
 import { sanitizeSlug } from './utils'
@@ -39,3 +41,19 @@ export const categoriesKeys = Object.keys(categoryMap) as [string, ...string[]]
 export const store = new Store({
   sideNavOpen: true,
 })
+
+// https://github.com/solidjs-community/solid-primitives/blob/main/packages/media/src/index.ts
+export const useIsMobile = () => {
+  if (isServer) {
+    return () => false
+  }
+
+  const mql = window.matchMedia('(max-width: 767px)')
+  const [state, setState] = createSignal(mql.matches)
+  const update = () => setState(mql.matches)
+  mql.addEventListener('change', update)
+  onCleanup(() => {
+    mql.removeEventListener('change', update)
+  })
+  return state
+}
