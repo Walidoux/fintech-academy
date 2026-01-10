@@ -3,21 +3,12 @@ import './app.css'
 import { MetaProvider } from '@solidjs/meta'
 import { Router } from '@solidjs/router'
 import { FileRoutes } from '@solidjs/start/router'
-import { type JSXElement, type ParentComponent, Suspense } from 'solid-js'
+import { type JSXElement, Suspense } from 'solid-js'
 import { Metadata } from './components/metadata'
 import { Navbar } from './components/navbar'
 import { ToastList, ToastRegion } from './components/ui/toast'
 import { APP } from './lib/store'
 import { ThemeProvider } from './providers/theme-provider'
-
-const Layout: ParentComponent = (props) => {
-  return (
-    <>
-      <Navbar />
-      <Suspense>{props.children}</Suspense>
-    </>
-  )
-}
 
 export default function App() {
   return (
@@ -27,7 +18,8 @@ export default function App() {
         root={(props: { children: JSXElement }) => (
           <MetaProvider>
             <Metadata title='Site' />
-            <Layout>{props.children}</Layout>
+            <Navbar />
+            <Suspense>{props.children}</Suspense>
             <ToastRegion>
               <ToastList />
             </ToastRegion>

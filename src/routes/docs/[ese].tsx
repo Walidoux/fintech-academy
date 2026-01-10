@@ -6,10 +6,12 @@ import { NAV_HEIGHT } from '~/lib/store'
 export default function DocsLayout(props: RouteSectionProps) {
   return (
     <main
-      class='grid grid-cols-[225px_1fr]'
+      class='grid md:grid-cols-[225px_1fr]'
       style={{ height: `calc(100vh - ${NAV_HEIGHT}px)` }}>
       <SideNav ese={props.params.ese as string} />
-      <section class='overflow-y-auto'>{props.children}</section>
-    </main>
+      <section class='relative overflow-y-auto md:col-start-2'>
+        {props.children}
+      </section>
+      </main>
   )
 }

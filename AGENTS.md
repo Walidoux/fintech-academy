@@ -216,6 +216,8 @@ When planning new features or implementations, use `grep_app_searchGitHub` MCP s
 
 **IMPORTANT**: Never run `bun run dev` - there is always an open dev server running on port 3000.
 
+The local server URL is `http://localhost:3000/fintech-academy`, where `fintech-academy` is the baseUrl explicitly set due to the GitHub Pages preset in `app.config.ts`.
+
 - Use chrome-devtools MCP tools for debugging:
   - Get console messages with `chrome-devtools_list_console_messages`
   - Monitor network requests with `chrome-devtools_list_network_requests`

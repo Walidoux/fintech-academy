@@ -66,7 +66,7 @@ export function SubNav<T>(props: Partial<Location<T>>) {
   }
 
   return (
-    <nav class='flex items-center justify-between p-4 px-6'>
+    <nav class='sticky top-0 col-span-2 flex items-center justify-between border-b p-4 px-6 backdrop-blur-md'>
       <Breadcrumb>
         <BreadcrumbList>
           <For each={segments}>

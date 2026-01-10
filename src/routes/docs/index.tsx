@@ -1,12 +1,23 @@
 import { type RouteSectionProps, useLocation } from '@solidjs/router'
 import { allPages } from 'content-collections'
+import type { ParentComponent } from 'solid-js'
 
 import { DocFooter } from '~/components/doc-footer'
-import { Metadata } from '~/components/metadata'
 import { SideNav } from '~/components/side-nav'
 import { SubNav } from '~/components/sub-nav'
 import MDXContent from '~/content/pages/introduction/index.mdx'
 import { NAV_HEIGHT } from '~/lib/store'
+
+const Layout: ParentComponent = (props) => (
+  <>
+    <SideNav />
+    <main
+      class='grid grid-rows-[1fr_100px]'
+      style={{ height: `calc(100vh - ${NAV_HEIGHT}px)` }}>
+      {props.children}
+    </main>
+  </>
+)
 
 export default function IntroductionPage(_props: RouteSectionProps) {
   const { pathname } = useLocation()
@@ -18,23 +29,15 @@ export default function IntroductionPage(_props: RouteSectionProps) {
   )
 
   return (
-    <>
-      <Metadata title={pageTitle} />
-      <main
-        class='grid grid-cols-[225px_1fr]'
-        style={{ height: `calc(100vh - ${NAV_HEIGHT}px)` }}>
-        <SideNav />
-        <section class='flex flex-col justify-between p-6'>
-          <SubNav pathname={pathname} />
-          <main class='h-full overflow-y-auto'>
-            <MDXContent />
-          </main>
-          <DocFooter
-            next={allPages[currentIdx + 1]}
-            previous={allPages[currentIdx - 1]}
-          />
-        </section>
-      </main>
-    </>
+    <Layout>
+      <SubNav pathname={pathname} />
+      <div class='overflow-y-auto p-6'>
+        <MDXContent />
+      </div>
+      <DocFooter
+        next={allPages[currentIdx + 1]}
+        previous={allPages[currentIdx - 1]}
+      />
+    </Layout>
   )
 }

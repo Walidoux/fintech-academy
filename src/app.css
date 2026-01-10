@@ -137,7 +137,9 @@
   }
 
   #app {
-    @apply font-sans bg-background text-foreground h-screen max-w-screen overflow-hidden;
+    @apply font-sans bg-background text-foreground h-screen max-w-screen overflow-hidden grid;
+    grid-template-columns: 215px 1fr;
+    grid-template-rows: 65px 1fr;
   }
 
   /* Custom scrollbar styling. */

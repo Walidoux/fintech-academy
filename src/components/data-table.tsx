@@ -17,7 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from './ui/table'
-import { TextField, TextFieldInput } from './ui/text-field'
 
 interface Props<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -50,7 +49,7 @@ export const DataTable = <TData, TValue>(props: Props<TData, TValue>) => {
 
   return (
     <div class='flex flex-col items-center'>
-      <TextField class='mb-6'>
+      {/*<TextField class='mb-6'>
         <TextFieldInput
           class='max-w-sm'
           onInput={(event) =>
@@ -59,7 +58,7 @@ export const DataTable = <TData, TValue>(props: Props<TData, TValue>) => {
           placeholder='Chercher un fournisseur...'
           value={(table.getColumn('frs')?.getFilterValue() as string) ?? ''}
         />
-      </TextField>
+      </TextField>*/}
       <div class='w-full rounded-md border'>
         <Table>
           <TableHeader>

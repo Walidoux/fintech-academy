@@ -13,10 +13,12 @@ export const FAVICON_URL =
 export const REGEX = {
   TASK_LIST: /^\s*(\[[\sx]\])\s*(.+)$/i,
   TEXT: {
-    CODE: /^%(.*)%$/,
-    BREAK: /(%.*?%)/g,
-    BOLD: /\*\*(.+?)\*\*/g,
-    LINK: /\[([^\]]+)\]\(([^)]+)\)/g,
+    CODE: {
+      CODE: /^%(.*)%$/,
+      BREAK: /(%.*?%)/g,
+      BOLD: /\*\*(.+?)\*\*/g,
+      LINK: /\[([^\]]+)\]\(([^)]+)\)/g,
+    },
   },
 }
 
@@ -39,7 +41,7 @@ export const categoryMap: Record<string, string> = {
 export const categoriesKeys = Object.keys(categoryMap) as [string, ...string[]]
 
 export const store = new Store({
-  sideNavOpen: true,
+  sideNavOpen: true, // Always start open, use CSS for responsive behavior
 })
 
 // https://github.com/solidjs-community/solid-primitives/blob/main/packages/media/src/index.ts
