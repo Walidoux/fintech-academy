@@ -2,7 +2,6 @@
 
 ## 💻 UI/UX Improvements
 
-- [ ] Implement TOC
 - [ ] Formatting issue with parsing integers - currency gets truncated
 - [ ] Typography not consistent enough
 - [ ] Add smart search dictionary for slugs and abbreviations
@@ -11,6 +10,7 @@
 <details>
     <summary>✅ Completed tasks</summary>
 
+- [x] Implement TOC
 - [x] Add search bar to look up text matches + magic keys ctrl+k
 - [x] Add DataTable component
 - [x] In dev mode only, add button to go file using preferred IDE

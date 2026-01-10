@@ -16,8 +16,6 @@ export const DocFooter = (props: DocsFooterProps) => {
     (key) => props[key as keyof typeof props]
   )
 
-  console.log(validKeys)
-
   return (
     <nav
       aria-label='doc-footer-pager'
