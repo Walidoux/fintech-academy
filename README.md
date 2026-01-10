@@ -59,3 +59,7 @@ YAML                             1              8              0             35
 SUM:                           101            914             48           6316
 -------------------------------------------------------------------------------
 ```
+
+My team would like to change the routing structure logic to use a more efficient approach and less complex than the existing one.
+Right now we are looking forward to moving the directory `content` to be called `docs`, and the content/docs mdx files will be moved to the root of the new `docs` directory. So this structure will shape the code in a way where when the pages loads, it will check first inside this new `docs` folder if there's a file with the same name as the last segment of the URL, if it does, it will render the content of that file, otherwise check subdirectories names of new `docs` folder, those subdirectories will be checked in a depth-first manner, they are referenced as "ese" which stands for "entreprise", meaning that they will have different names.
+

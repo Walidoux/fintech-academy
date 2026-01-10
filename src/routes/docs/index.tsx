@@ -8,7 +8,7 @@ import { SubNav } from '~/components/sub-nav'
 import MDXContent from '~/content/pages/introduction/index.mdx'
 import { NAV_HEIGHT } from '~/lib/store'
 
-const Layout: ParentComponent = (props) => (
+export const DocsLayout: ParentComponent = (props) => (
   <>
     <SideNav />
     <main
@@ -19,6 +19,7 @@ const Layout: ParentComponent = (props) => (
   </>
 )
 
+/** Introduction Docs Page */
 export default function IntroductionPage(_props: RouteSectionProps) {
   const { pathname } = useLocation()
 
@@ -29,7 +30,7 @@ export default function IntroductionPage(_props: RouteSectionProps) {
   )
 
   return (
-    <Layout>
+    <DocsLayout>
       <SubNav pathname={pathname} />
       <div class='overflow-y-auto p-6'>
         <MDXContent />
@@ -38,6 +39,6 @@ export default function IntroductionPage(_props: RouteSectionProps) {
         next={allPages[currentIdx + 1]}
         previous={allPages[currentIdx - 1]}
       />
-    </Layout>
+    </DocsLayout>
   )
 }

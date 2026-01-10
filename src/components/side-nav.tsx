@@ -2,7 +2,7 @@ import { A } from '@solidjs/router'
 import { allDocs } from 'content-collections'
 import { type Component, For, type ParentComponent } from 'solid-js'
 
-import { categoryMap, NAV_HEIGHT } from '~/lib/store'
+import { categoryMap } from '~/lib/store'
 
 const defaultSubSections = [
   {
@@ -67,13 +67,12 @@ export const SideNav: Component<{ ese?: string }> = (props) => {
   ]
 
   return (
-    <aside
-      class='flex flex-col gap-y-6 overflow-y-auto border-r p-6'>
-      <For each={sections}>
+    <aside class='flex flex-col gap-y-6 overflow-y-auto border-r p-6'>
+      <For each={sections} fallback={<div />}>
         {(section) => (
           <div class='flex flex-col gap-y-2'>
             <h4 class='select-none'>{section.title}</h4>
-            <For each={section.links}>
+            <For each={section.links} fallback={<div />}>
               {(link) => (
                 <SideNavLink href={link.href ?? props.ese}>
                   {link.title}

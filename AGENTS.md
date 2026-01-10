@@ -99,7 +99,7 @@ createEffect(() => {
 
 ### MDX Content
 
-- **Content collections**: Use @content-collections/core for typed content
+- **Content collections**: @content-collections/core is a type-safe data collections library that stores docs globally under content-collections.ts and is used to import and render dynamically by importing MDX files from src/content
 - **Math support**: KaTeX and remark-math for mathematical expressions
 - **Mermaid diagrams**: Integrated diagram support
 - **Custom components**: Extend with SolidJS components in MDX
