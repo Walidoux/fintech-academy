@@ -48,7 +48,7 @@ export const DocsLayout: ParentComponent = (props) => {
   return (
     <>
       <SideNav />
-      <main class='grid grid-cols-[1fr_200px] grid-rows-[1fr_100px]'>
+      <main class='grid h-[calc(100vh-65px)] grid-cols-[1fr_225px] grid-rows-[1fr_100px]'>
         <div class='overflow-y-auto p-6'>{props.children}</div>
         <Toc data={headings()} />
 

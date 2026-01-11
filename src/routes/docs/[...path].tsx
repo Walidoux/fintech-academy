@@ -142,30 +142,24 @@ export default function DocsPage(props: {
     <>
       {renderMetadata()}
       <DocsLayout>
-        <div
-          class='overflow-y-auto'
-          ref={(el) => {
-            _main = el
-          }}>
-          <Dynamic component={MDXComp()} />
-          {isRootDoc() && subPages().length > 0 && (
-            <ul class='mt-6 grid grid-cols-3 gap-3'>
-              <For each={subPages()}>
-                {(page) => (
-                  <Card class='min-h-12'>
-                    <CardContent class='flex h-full items-center p-0'>
-                      <A
-                        class='w-full px-4 py-2'
-                        href={`/docs/${path()[0]}/${page.slug}`}>
-                        {page.title}
-                      </A>
-                    </CardContent>
-                  </Card>
-                )}
-              </For>
-            </ul>
-          )}
-        </div>
+        <Dynamic component={MDXComp()} />
+        {isRootDoc() && subPages().length > 0 && (
+          <ul class='mt-6 grid grid-cols-3 gap-3'>
+            <For each={subPages()}>
+              {(page) => (
+                <Card class='min-h-12'>
+                  <CardContent class='flex h-full items-center p-0'>
+                    <A
+                      class='w-full px-4 py-2'
+                      href={`/docs/${path()[0]}/${page.slug}`}>
+                      {page.title}
+                    </A>
+                  </CardContent>
+                </Card>
+              )}
+            </For>
+          </ul>
+        )}
       </DocsLayout>
     </>
   )
