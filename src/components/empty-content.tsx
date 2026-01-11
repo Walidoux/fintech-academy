@@ -1,10 +1,11 @@
-export const EmptyContent = () => {
-  return (
+export const EmptyContent = () => (
+  <main class='grid h-full place-items-center'>
     <svg
+      class='opacity-50'
       fill='none'
-      height='602'
+      height='302'
       viewBox='0 0 616 602'
-      width='616'
+      width='316'
       xmlns='http://www.w3.org/2000/svg'>
       <title>Empty Content Illustration</title>
       <g clip-path='url(#clip0_2524_1063)'>
@@ -177,5 +178,5 @@ export const EmptyContent = () => {
         </clipPath>
       </defs>
     </svg>
-  )
-}
+  </main>
+)

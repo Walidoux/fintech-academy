@@ -3,7 +3,6 @@
 ## 💻 UI/UX Improvements
 
 - [ ] Add motion/motion-solid to animate transitions between routes
-- [ ] Add empty illustration if mdx of route has no content
 - [ ] Add [lighthouse](https://github.com/marketplace/actions/lighthouse-ci-action) in github actions
 - [ ] Formatting issue with parsing integers - currency gets truncated
 - [ ] Add smart search dictionary for slugs and abbreviations
@@ -11,8 +10,10 @@
 - [ ] Upload xlsx/csv files in page to produce mdx code to copy and insert it to the page
 
 <details>
-    <summary>✅ Completed tasks</summary>
+    <summary>✅ Completed tasks *(from recent to oldest)*</summary>
 
+- [x] Add empty illustration if mdx of route has no content
+- [x] Fix dark/light theme issues everywhere + flickering between server/client 
 - [x] Add skeletons as loading states and load page as soon as possible
 - [x] Implement TOC (Table Of Contents)
 - [x] Disallow routes from both URL redirections and navigations

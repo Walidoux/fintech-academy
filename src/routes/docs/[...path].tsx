@@ -11,6 +11,7 @@ import {
 import { Dynamic } from 'solid-js/web'
 
 import { DocsLayout } from '~/components/docs-layout'
+import { EmptyContent } from '~/components/empty-content'
 import { SEO } from '~/components/metadata'
 import { Spinner } from '~/components/spinner'
 
@@ -87,12 +88,23 @@ export default function DocsPage(props: {
     const currentPath = path()
     const fullPath = currentPath.join('/')
     const doc = currentDocument()
+
     setIsLoading(true)
+
+    // docs exists but client-restricted for "visibility" purposes
     if (doc?.disabled) {
       setMDXComp(() => NotFound)
       setIsLoading(false)
       return
     }
+
+    // docs exists but content is empty
+    if (doc && doc.headings.length === 0) {
+      setMDXComp(() => EmptyContent)
+      setIsLoading(false)
+      return
+    }
+
     import(`~/docs/${fullPath}.mdx`)
       .then((mod) => {
         setMDXComp(() => mod.default)

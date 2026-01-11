@@ -53,12 +53,12 @@ export const DialogContent = <T extends ValidComponent = 'div'>(
   return (
     <>
       <DialogPrimitive.Overlay
-        class='data-[closed]:fade-out-0 data-[expanded]:fade-in-0 fixed inset-0 z-50 bg-black/50 data-[closed]:animate-out data-[expanded]:animate-in'
+        class='data-closed:fade-out-0 data-expanded:fade-in-0 fixed inset-0 z-50 bg-black/50 data-closed:animate-out data-expanded:animate-in'
         data-slot='dialog-overlay'
       />
       <DialogPrimitive.Content
         class={cn(
-          'data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 data-[closed]:animate-out data-[expanded]:animate-in sm:max-w-lg',
+          'data-closed:fade-out-0 data-expanded:fade-in-0 data-closed:zoom-out-95 data-expanded:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 data-closed:animate-out data-expanded:animate-in sm:max-w-lg',
           props.class
         )}
         data-slot='dialog-content'
