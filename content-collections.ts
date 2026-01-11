@@ -62,6 +62,7 @@ const pages = defineCollection({
   include: '{nestle,dooc,manar-conseil}/**/*.mdx',
   schema: (z) => ({
     title: z.string(),
+    disabled: z.boolean().optional(),
     headings: z
       .array(
         z.object({
@@ -99,6 +100,7 @@ const docs = defineCollection({
     title: z.string(),
     description: z.string(),
     category: z.enum(categoriesKeys).optional(),
+    disabled: z.boolean().optional(),
     headings: z
       .array(
         z.object({

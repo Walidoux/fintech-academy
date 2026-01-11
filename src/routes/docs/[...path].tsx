@@ -43,6 +43,14 @@ export default function DocsPage(props: {
     return allDocs.find((doc) => doc._meta.path === fullPath())
   })
 
+  const currentPage = createMemo(() => {
+    return allPages.find((page) => page._meta.path === fullPath())
+  })
+
+  const currentDocument = createMemo(() => {
+    return currentDoc() || currentPage()
+  })
+
   const canonicalUrl = createMemo(() => {
     const baseUrl = 'https://walidoux.github.io'
     return `${baseUrl}/fintech-academy/docs/${fullPath()}`
@@ -53,7 +61,8 @@ export default function DocsPage(props: {
       .filter(
         (page) =>
           page._meta.path.startsWith(`${path()[0]}/`) &&
-          page._meta.path !== `${path()[0]}/index`
+          page._meta.path !== `${path()[0]}/index` &&
+          !page.disabled
       )
       .map((page) => ({
         slug: page._meta.path.split('/')[1],
@@ -64,6 +73,11 @@ export default function DocsPage(props: {
   createEffect(() => {
     const currentPath = path()
     const fullPath = currentPath.join('/')
+    const doc = currentDocument()
+    if (doc?.disabled) {
+      setMDXComp(() => NotFound)
+      return
+    }
     import(`~/docs/${fullPath}.mdx`)
       .then((mod) => setMDXComp(() => mod.default))
       .catch(() => {

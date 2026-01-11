@@ -1,5 +1,5 @@
 import { A } from '@solidjs/router'
-import { allDocs } from 'content-collections'
+import { allDocs, allPages } from 'content-collections'
 import { type Component, For, type ParentComponent } from 'solid-js'
 
 import { categoryMap } from '~/lib/store'
@@ -26,11 +26,20 @@ export const internships = [
   },
 ]
 
+const isDisabledRoute = (href: string) => {
+  const path = href.replace('/docs/', '')
+  const doc = [...allDocs, ...allPages].find(
+    (d) => d._meta.path === path || d._meta.path === `${path}/index`
+  )
+  return doc?.disabled === true
+}
+
 const SideNavLink: ParentComponent<{ href: string }> = (props) => {
+  const disabled = isDisabledRoute(props.href)
   return (
     <A
       activeClass='font-medium text-primary'
-      class='select-none text-sm'
+      class={`select-none text-sm ${disabled ? 'pointer-events-none line-through opacity-25!' : ''}`}
       end
       href={props.href}
       inactiveClass='opacity-50'>
