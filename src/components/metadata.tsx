@@ -51,7 +51,6 @@ export const Metadata = (props: MetadataProps) => {
       {props.keywords && props.keywords.length > 0 && (
         <Meta content={props.keywords.join(', ')} name='keywords' />
       )}
-      <Meta charset='utf-8' />
       <Meta content='width=device-width, initial-scale=1' name='viewport' />
 
       {/* Canonical URL */}

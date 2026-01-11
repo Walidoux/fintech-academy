@@ -2,15 +2,19 @@
 
 ## 💻 UI/UX Improvements
 
+- [ ] Add empty illustration if mdx of route has no content
+- [ ] Add [lighthouse](https://github.com/marketplace/actions/lighthouse-ci-action) in github actions
+- [ ] Add skeletons as loading states and load page as soon as possible
 - [ ] Formatting issue with parsing integers - currency gets truncated
-- [ ] Typography not consistent enough
 - [ ] Add smart search dictionary for slugs and abbreviations
+- [ ] Typography not consistent enough
 - [ ] Upload xlsx/csv files in page to produce mdx code to copy and insert it to the page
 
 <details>
     <summary>✅ Completed tasks</summary>
 
-- [x] Implement TOC
+- [x] Implement TOC (Table Of Contents)
+- [x] Disallow routes from both URL redirections and navigations
 - [x] Add search bar to look up text matches + magic keys ctrl+k
 - [x] Add DataTable component
 - [x] In dev mode only, add button to go file using preferred IDE

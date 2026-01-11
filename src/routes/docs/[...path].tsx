@@ -6,6 +6,7 @@ import {
   createMemo,
   createSignal,
   For,
+  Show,
 } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 
@@ -13,12 +14,14 @@ import { DocsLayout } from '~/components/docs-layout'
 import { SEO } from '~/components/metadata'
 
 import { Card, CardContent } from '~/components/ui/card'
+import { Skeleton } from '~/components/ui/skeleton'
 import NotFound from '~/routes/[...404]'
 
 export default function DocsPage(props: {
   params: { path: string[] | string }
 }) {
   const [MDXComp, setMDXComp] = createSignal<Component>()
+  const [isLoading, setIsLoading] = createSignal(true)
   const [_headings, _setHeadings] = createSignal<
     { depth: number; slug: string; text: string }[]
   >([])
@@ -48,7 +51,17 @@ export default function DocsPage(props: {
   })
 
   const currentDocument = createMemo(() => {
-    return currentDoc() || currentPage()
+    // First try exact match
+    const exact = currentDoc() || currentPage()
+    if (exact) {
+      return exact
+    }
+
+    // If not found and single path segment, check for index page
+    if (path().length === 1) {
+      return allPages.find((page) => page._meta.path === `${fullPath()}/index`)
+    }
+    return null
   })
 
   const canonicalUrl = createMemo(() => {
@@ -74,19 +87,31 @@ export default function DocsPage(props: {
     const currentPath = path()
     const fullPath = currentPath.join('/')
     const doc = currentDocument()
+    setIsLoading(true)
     if (doc?.disabled) {
       setMDXComp(() => NotFound)
+      setIsLoading(false)
       return
     }
     import(`~/docs/${fullPath}.mdx`)
-      .then((mod) => setMDXComp(() => mod.default))
+      .then((mod) => {
+        setMDXComp(() => mod.default)
+        setIsLoading(false)
+      })
       .catch(() => {
         if (currentPath.length === 1) {
           import(`~/docs/${fullPath}/index.mdx`)
-            .then((mod) => setMDXComp(() => mod.default))
-            .catch(() => setMDXComp(() => NotFound))
+            .then((mod) => {
+              setMDXComp(() => mod.default)
+              setIsLoading(false)
+            })
+            .catch(() => {
+              setMDXComp(() => NotFound)
+              setIsLoading(false)
+            })
         } else {
           setMDXComp(() => NotFound)
+          setIsLoading(false)
         }
       })
   })
@@ -142,24 +167,42 @@ export default function DocsPage(props: {
     <>
       {renderMetadata()}
       <DocsLayout>
-        <Dynamic component={MDXComp()} />
-        {isRootDoc() && subPages().length > 0 && (
-          <ul class='mt-6 grid grid-cols-3 gap-3'>
-            <For each={subPages()}>
-              {(page) => (
-                <Card class='min-h-12'>
-                  <CardContent class='flex h-full items-center p-0'>
-                    <A
-                      class='w-full px-4 py-2'
-                      href={`/docs/${path()[0]}/${page.slug}`}>
-                      {page.title}
-                    </A>
-                  </CardContent>
-                </Card>
-              )}
-            </For>
-          </ul>
-        )}
+        <Show
+          fallback={
+            <div class='space-y-4'>
+              <Skeleton class='h-3/4' height={32} />
+              <Skeleton class='w-full' height={16} />
+              <Skeleton class='w-5/6' height={16} />
+              <Skeleton class='w-4/5' height={16} />
+              <div class='mt-6 space-y-2'>
+                <Skeleton class='w-2/3' height={16} />
+                <Skeleton class='w-3/4' height={16} />
+                <Skeleton class='w-1/2' height={16} />
+              </div>
+            </div>
+          }
+          when={!isLoading()}>
+          <Dynamic component={MDXComp()} />
+        </Show>
+        {isRootDoc() &&
+          subPages().length > 0 &&
+          !currentDocument()?.disabled && (
+            <ul class='mt-6 grid grid-cols-3 gap-3'>
+              <For each={subPages()}>
+                {(page) => (
+                  <Card class='min-h-12'>
+                    <CardContent class='flex h-full items-center p-0'>
+                      <A
+                        class='w-full px-4 py-2'
+                        href={`/docs/${path()[0]}/${page.slug}`}>
+                        {page.title}
+                      </A>
+                    </CardContent>
+                  </Card>
+                )}
+              </For>
+            </ul>
+          )}
       </DocsLayout>
     </>
   )

@@ -18,5 +18,9 @@
     "lib": "~/lib",
     "hooks": "~/hooks"
   },
-  "registries": {}
+  "registries": {
+    "@shadcn": {
+      "url": "https://ui.shadcn.com/registry"
+    }
+  }
 }

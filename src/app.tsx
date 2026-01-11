@@ -1,6 +1,6 @@
 import './app.css'
 
-import { MetaProvider } from '@solidjs/meta'
+import { Meta, MetaProvider } from '@solidjs/meta'
 import { Router } from '@solidjs/router'
 import { FileRoutes } from '@solidjs/start/router'
 import { type JSXElement, Suspense } from 'solid-js'
@@ -17,6 +17,8 @@ export default function App() {
         root={(props: { children: JSXElement }) => (
           <MetaProvider>
             <Navbar />
+            <Meta charset='utf-8' />
+            <Meta content='text/html; charset=utf-8' http-equiv='content-type' />
             <Suspense>{props.children}</Suspense>
             <ToastRegion>
               <ToastList />

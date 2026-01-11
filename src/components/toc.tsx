@@ -16,11 +16,32 @@ const Toc = (props: {
     // Reset active items when data changes
     setActiveItem([])
 
-    const newTargets = props.data
+    // Use MutationObserver to wait for headings to be added to DOM
+    const observer = new MutationObserver(() => {
+      const newTargets = props.data
+        .map((item) => document.getElementById(item.slug))
+        .filter((el) => el !== null) as Element[]
+
+      if (newTargets.length > 0) {
+        setTargets(newTargets)
+        observer.disconnect()
+      }
+    })
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    })
+
+    // Also check immediately in case elements are already there
+    const immediateTargets = props.data
       .map((item) => document.getElementById(item.slug))
       .filter((el) => el !== null) as Element[]
 
-    setTargets(newTargets)
+    if (immediateTargets.length > 0) {
+      setTargets(immediateTargets)
+      observer.disconnect()
+    }
   })
 
   createIntersectionObserver(targets, (entries) => {

@@ -38,7 +38,9 @@ const extractHeadings = (content: string) => {
 
   for (const line of lines) {
     // Skip empty lines
-    if (!line.trim()) continue
+    if (!line.trim()) {
+      continue
+    }
 
     // Match markdown headings: # Heading, ## Subheading, etc.
     const match = line.match(/^(#{1,6})\s+(.+)$/)
