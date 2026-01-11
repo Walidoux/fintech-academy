@@ -6,6 +6,9 @@ import { cn } from 'tailwind-variants'
 import { APP } from '~/lib/store'
 import CommandMenu from './search'
 import { ThemeSwitcher } from './theme-switcher'
+import { Image, ImageFallback, ImageRoot } from './ui/image'
+import { Separator } from './ui/separator'
+import { Skeleton } from './ui/skeleton'
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
 
 export const Navbar = () => {
@@ -26,19 +29,21 @@ export const Navbar = () => {
   return (
     <nav class='col-span-2 border-b'>
       <div class='mx-auto flex h-full max-w-6xl items-center justify-between px-3 py-2'>
-        <img
-          alt='Logo'
-          class='select-none'
-          draggable={false}
-          height={50}
-          src={resolvePath(import.meta.env.SERVER_BASE_URL, 'logo.svg')}
-          width={50}
-        />
+        <ImageRoot>
+          <Image
+            alt='Logo'
+            class='select-none'
+            draggable={false}
+            height={50}
+            src={resolvePath(import.meta.env.SERVER_BASE_URL, 'logo.svg')}
+            width={50}
+          />
+          <ImageFallback>
+            <Skeleton height={50} width={50} />
+          </ImageFallback>
+        </ImageRoot>
+
         <div class='inline-flex items-center'>
-          <CommandMenu />
-
-          <span class='mx-2 my-2 min-h-[-webkit-fill-available] w-px bg-border' />
-
           <Show when={process.env.NODE_ENV === 'development'}>
             <Tooltip>
               <TooltipTrigger>
@@ -64,7 +69,11 @@ export const Navbar = () => {
             </Tooltip>
           </Show>
 
-          <span class='mx-2 my-2 min-h-[-webkit-fill-available] w-px bg-border' />
+          <Separator class='mx-2 list-item' orientation='vertical' />
+
+          <CommandMenu />
+
+          <Separator class='mx-2 list-item' orientation='vertical' />
 
           <Tooltip>
             <TooltipTrigger>
@@ -73,7 +82,7 @@ export const Navbar = () => {
                 href={APP.GITHUB_URL}
                 rel='noopener noreferrer'
                 target='_blank'>
-                <TbBrandGithub />
+                <TbBrandGithub size={20} />
               </A>
             </TooltipTrigger>
             <TooltipContent class='inline-flex gap-x-2'>

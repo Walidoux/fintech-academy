@@ -12,9 +12,9 @@ import { Dynamic } from 'solid-js/web'
 
 import { DocsLayout } from '~/components/docs-layout'
 import { SEO } from '~/components/metadata'
+import { Spinner } from '~/components/spinner'
 
 import { Card, CardContent } from '~/components/ui/card'
-import { Skeleton } from '~/components/ui/skeleton'
 import NotFound from '~/routes/[...404]'
 
 export default function DocsPage(props: {
@@ -169,16 +169,8 @@ export default function DocsPage(props: {
       <DocsLayout>
         <Show
           fallback={
-            <div class='space-y-4'>
-              <Skeleton class='h-3/4' height={32} />
-              <Skeleton class='w-full' height={16} />
-              <Skeleton class='w-5/6' height={16} />
-              <Skeleton class='w-4/5' height={16} />
-              <div class='mt-6 space-y-2'>
-                <Skeleton class='w-2/3' height={16} />
-                <Skeleton class='w-3/4' height={16} />
-                <Skeleton class='w-1/2' height={16} />
-              </div>
+            <div class='grid h-full place-items-center'>
+              <Spinner class='opacity-60' size={24} />
             </div>
           }
           when={!isLoading()}>

@@ -2,9 +2,9 @@
 
 ## 💻 UI/UX Improvements
 
+- [ ] Add motion/motion-solid to animate transitions between routes
 - [ ] Add empty illustration if mdx of route has no content
 - [ ] Add [lighthouse](https://github.com/marketplace/actions/lighthouse-ci-action) in github actions
-- [ ] Add skeletons as loading states and load page as soon as possible
 - [ ] Formatting issue with parsing integers - currency gets truncated
 - [ ] Add smart search dictionary for slugs and abbreviations
 - [ ] Typography not consistent enough
@@ -13,6 +13,7 @@
 <details>
     <summary>✅ Completed tasks</summary>
 
+- [x] Add skeletons as loading states and load page as soon as possible
 - [x] Implement TOC (Table Of Contents)
 - [x] Disallow routes from both URL redirections and navigations
 - [x] Add search bar to look up text matches + magic keys ctrl+k
@@ -54,12 +55,12 @@
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-TypeScript                      60            506             45           5028
-Markdown                        36            379              0            980
-CSS                              1             21              3            146
-JSON                             3              0              0            127
-YAML                             1              8              0             35
+TypeScript                      65            625            116           5901
+Markdown                        36            409              0           1292
+CSS                              1             21              3            148
+JSON                             3              0              0            136
+YAML                             1             16              0             69
 -------------------------------------------------------------------------------
-SUM:                           101            914             48           6316
+SUM:                           106           1071            119           7546
 -------------------------------------------------------------------------------
 ```

@@ -170,6 +170,7 @@ export function createCookieStorageManager(
       return parseCookie(document.cookie, key) ?? fallback
     },
     set: (value) => {
+      // biome-ignore lint/suspicious/noDocumentCookie: we should use cookiejs instead
       document.cookie = `${key}=${value}; max-age=31536000; path=/`
     },
   }

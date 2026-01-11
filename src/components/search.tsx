@@ -1,5 +1,6 @@
 import { useNavigate } from '@solidjs/router'
 import { allDocs } from 'content-collections'
+import { BsCommand } from 'solid-icons/bs'
 import {
   type ComponentProps,
   createEffect,
@@ -28,7 +29,7 @@ import {
   DialogPortal,
   DialogTitle,
 } from './ui/dialog'
-import { Kbd, KbdGroup } from './ui/kbd'
+import { Kbd } from './ui/kbd'
 
 const CommandKbd = (props: ComponentProps<'kbd'>) => {
   const [local, rest] = splitProps(props, ['class'])
@@ -64,7 +65,6 @@ const CommandMenuItem = (
 
 const CommandMenu = () => {
   const navigate = useNavigate()
-
   const [open, setOpen] = createSignal(false)
 
   const runCommand = (command: () => unknown) => {
@@ -101,19 +101,13 @@ const CommandMenu = () => {
       <AlertDialogTrigger<typeof Button>
         as={(props) => (
           <Button
-            class='relative h-8 w-full justify-start bg-surface pl-2.5 font-normal text-foreground shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64 dark:bg-card'
-            variant='secondary'
+            class='relative h-8 w-40 justify-start bg-surface pl-2.5 font-normal text-foreground shadow-none sm:pr-12 dark:bg-card'
+            variant='outline'
             {...props}>
-            <span class='hidden lg:inline-flex'>
-              Rechercher une référence...
-            </span>
-            <span class='inline-flex lg:hidden'>Rechercher...</span>
-            <div class='absolute top-1.5 right-1.5 hidden gap-1 sm:flex'>
-              <KbdGroup>
-                <Kbd class='border'>⌘</Kbd>
-                <Kbd class='border'>K</Kbd>
-              </KbdGroup>
-            </div>
+            <span class='text-muted-foreground text-xs'>Chercher...</span>
+            <Kbd class='absolute top-1/2 right-1.5 hidden -translate-y-1/2 gap-1 border sm:flex'>
+              <BsCommand size={14} /> K
+            </Kbd>
           </Button>
         )}
       />
