@@ -34,7 +34,7 @@ export const DocFooter = (props: DocsFooterProps) => {
                   'col-span-2 col-start-2':
                     key === 'next' && validKeys.length === 1,
                 },
-                'relative grid rounded-md border border-[#e2e2e3] bg-background px-4 py-3 transition-colors hover:border-primary hover:bg-primary/10 dark:border-border dark:hover:border-primary'
+                'relative grid rounded-md border border-border bg-background px-4 py-3 transition-colors hover:border-primary hover:bg-primary/10 dark:border-border dark:hover:border-primary'
               )}
               href={page._meta.filePath}>
               <span class='block font-medium text-[#67676c] text-xs leading-5'>

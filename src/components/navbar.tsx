@@ -3,7 +3,7 @@ import { resolvePath } from 'node_modules/@solidjs/router/dist/utils'
 import { TbBrandGithub, TbExternalLink } from 'solid-icons/tb'
 import { createEffect, createSignal, Show } from 'solid-js'
 import { cn } from 'tailwind-variants'
-import { APP, NAV_HEIGHT } from '~/lib/store'
+import { APP } from '~/lib/store'
 import CommandMenu from './search'
 import { ThemeSwitcher } from './theme-switcher'
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
@@ -24,7 +24,7 @@ export const Navbar = () => {
   })
 
   return (
-    <nav class='col-span-2 border-b' style={{ height: `${NAV_HEIGHT}px` }}>
+    <nav class='col-span-2 border-b'>
       <div class='mx-auto flex h-full max-w-6xl items-center justify-between px-3 py-2'>
         <img
           alt='Logo'
@@ -82,14 +82,7 @@ export const Navbar = () => {
             </TooltipContent>
           </Tooltip>
 
-          <Tooltip>
-            <TooltipTrigger>
-              <ThemeSwitcher />
-            </TooltipTrigger>
-            <TooltipContent class='inline-flex gap-x-2'>
-              Changer le thème
-            </TooltipContent>
-          </Tooltip>
+          <ThemeSwitcher />
         </div>
       </div>
     </nav>

@@ -42,7 +42,7 @@ function processBold(text: string): Array<RawComponent | string> {
   let match: RegExpExecArray | null
 
   while (true) {
-    match = REGEX.TEXT.BOLD.exec(text)
+    match = REGEX.TEXT.CODE.BOLD.exec(text)
     if (match === null) {
       break
     }
@@ -67,8 +67,8 @@ function processBold(text: string): Array<RawComponent | string> {
  * @returns An array of raw components.
  */
 export function parseMarkdown(content: string): RawComponent[] {
-  return content.split(REGEX.TEXT.BREAK).flatMap((part) => {
-    const codeMatch = part.match(REGEX.TEXT.CODE)
+  return content.split(REGEX.TEXT.CODE.BREAK).flatMap((part) => {
+    const codeMatch = part.match(REGEX.TEXT.CODE.CODE)
     if (codeMatch) {
       return { comp: 'CodeCaption', label: codeMatch[1].trim() }
     }
@@ -78,7 +78,7 @@ export function parseMarkdown(content: string): RawComponent[] {
     let match: RegExpExecArray | null
 
     while (true) {
-      match = REGEX.TEXT.LINK.exec(part)
+      match = REGEX.TEXT.CODE.LINK.exec(part)
       if (match === null) {
         break
       }
