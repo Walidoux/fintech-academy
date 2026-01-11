@@ -100,9 +100,8 @@ export default function DocsPage(props: {
 
     return (
       <SEO
-        title={metadata.title}
-        description={metadata.description}
         canonicalUrl={canonicalUrl()}
+        description={metadata.description}
         ogType='article'
         structuredData={{
           '@context': 'https://schema.org',
@@ -120,6 +119,7 @@ export default function DocsPage(props: {
             name: 'Walid Korchi',
           },
         }}
+        title={metadata.title}
       />
     )
   }

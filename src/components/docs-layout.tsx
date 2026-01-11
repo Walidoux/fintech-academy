@@ -1,7 +1,7 @@
 import { useLocation } from '@solidjs/router'
 import { allDocs, allPages } from 'content-collections'
-import { createMemo } from 'solid-js'
 import type { ParentComponent } from 'solid-js'
+import { createMemo } from 'solid-js'
 
 import { SideNav } from '~/components/side-nav'
 import { DocFooter } from './doc-footer'
